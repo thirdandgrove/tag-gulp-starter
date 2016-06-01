@@ -13,7 +13,7 @@ TAG SCSS Starter w/ Gulp
 
 1. In general, all units should use the `px-to-rem()` described in scss/base/_functions.scss
 2. With rare case-by-case exceptions, bitmap sprites should never be used.
-3. For single-color icons, create an icon font using [Icomoon][https://icomoon.io/], and create the generated font files and selection.json in the fonts folder. Pre-made icon fonts such as Iconic should not be used, as they contain many more icons than used in a given project.
+3. For single-color icons, create an icon font using [Icomoon](https://icomoon.io/), and create the generated font files and selection.json in the fonts folder. Pre-made icon fonts such as Iconic should not be used, as they contain many more icons than used in a given project.
 4. For multi-color illustrations for which a bitmap sprite might often be used, use an SVG sprite instead if at all possible.
 5. Do not nest your CSS selectors. While SCSS provides this functionality, it can easily get out of control creating hard-to-read code and unwieldy selectors.
 6. All styling should be done mobile-first. This repo contains a mixin for the `min-width` media query only, and in the vast majority of cases that should be sufficient.
