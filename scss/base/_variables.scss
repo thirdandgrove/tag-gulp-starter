@@ -1,0 +1,45 @@
+// Colors variables
+// Color variables should start with 'c-'
+$c-black: #000000;
+$c-white: #ffffff;
+$c-whatever: #ff0000;
+$c-text: $c-black; // etc.
+
+// Font-related variables
+// Font variables should start with 'font-'
+$font-family-serif: 'Georgia', serif;
+$font-family-sans: 'Helvetica', sans-serif;
+$font-size-base: 16; // The default font size for your site
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+// Breakpoint variables
+// Breakpoint variables should start with 'bp-'
+$bp-sm: 35em; //560px
+$bp-md: 60em; //960px
+$bp-lg: 75em; //1200px
+
+// Icon variables
+// Icon variables should start with 'i-'
+// Adjust as needed
+$i-plus: '\e900';
+$i-arrow-rt: '\e901';
+$i-facebook: '\e902';
+
+// Z-index variables
+// Z-index variables should start with 'z-'
+$z-1: 100;
+$z-2: 200;
+$z-3: 300;
+$z-4: 400;
+$z-5: 500;
+$z-6: 600;
+$z-7: 700;
+$z-8: 800;
+$z-9: 900;
+$z-10: 1000;
+
+// Commonalities to keep consistent across the site
+$border-radius: 5px;
+$transition: all 0.3s ease;
+$box-shadow: 0px 4px 4px 0px rgba($c-black, 0.25);

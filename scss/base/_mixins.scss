@@ -1,0 +1,32 @@
+// Variables for the breakpoints are in the _variables partial
+// Example:
+// .foo {
+//   width: 100%;
+//   @include breakpoint($bp-sm) {
+//     width: 50%;
+//   }
+// }
+@mixin breakpoint($bp) {
+  @media (min-width: #{$bp}) {
+    @content;
+  }
+}
+
+// Variables for the icons are in the _variables partial
+// Example:
+// .foo:before {
+//   @include icon($i-arrow-rt);
+// }
+@mixin icon($symbol) {
+  @extend %icon;
+  content: $symbol;
+}
+
+// Gradients
+@mixin gradient-vert($color1, $color2) {
+  background: linear-gradient(to bottom, $color1 0%, $color2 100%);
+}
+
+@mixin gradient-hor($color1, $color2) {
+  background: linear-gradient(to right, $color1 0%, $color2 100%);
+}
