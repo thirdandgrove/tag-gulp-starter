@@ -8,5 +8,7 @@
 // max-width: px-to-rem(1200);
 
 @function px-to-rem($number) {
-  @return $number/$font-size-base * 1rem;
+  $raw: $number/$font-size-base;
+  $rounded: ceil($raw * 1000)/1000;
+  @return $rounded * 1rem;
 }
