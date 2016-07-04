@@ -23,6 +23,6 @@ TAG SCSS Starter w/ Gulp
 * [SCSS basics](http://sass-lang.com/guide) and [full SCSS documentation](http://sass-lang.com/documentation/file.SASS_REFERENCE.html)
 * [Icomoon documentation](https://icomoon.io/#docs)
 
-## Frequently Use JS Libraries:
+## Frequently Used JS Libraries:
 * [Owl carousel](http://www.owlcarousel.owlgraphic.com/) and its [documentation](http://www.owlcarousel.owlgraphic.com/docs/api-options.html)
 * [MatchHeight](https://github.com/liabru/jquery-match-height)
