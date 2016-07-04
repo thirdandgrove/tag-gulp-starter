@@ -20,9 +20,9 @@ TAG SCSS Starter w/ Gulp
 * When in doubt, break your code out into its own partial. You can add partials by first creating the partial and then importing it from _components.scss, _base.scss, _layout.scss, or _global.scss. In the majority of cases, it will belong in components. Do not put partials outside of these folders.
 
 ## Helpful References:
-* [SCSS basics][http://sass-lang.com/guide] and [full SCSS documentation][http://sass-lang.com/documentation/file.SASS_REFERENCE.html]
-* [Icomoon documentation][https://icomoon.io/#docs]
+* [SCSS basics](http://sass-lang.com/guide) and [full SCSS documentation](http://sass-lang.com/documentation/file.SASS_REFERENCE.html)
+* [Icomoon documentation](https://icomoon.io/#docs)
 
 ## Frequently Use JS Libraries:
-* [Owl carousel][http://www.owlcarousel.owlgraphic.com/] and its [documentation][http://www.owlcarousel.owlgraphic.com/docs/api-options.html]
-* [MatchHeight][https://github.com/liabru/jquery-match-height]
+* [Owl carousel](http://www.owlcarousel.owlgraphic.com/) and its [documentation](http://www.owlcarousel.owlgraphic.com/docs/api-options.html)
+* [MatchHeight](https://github.com/liabru/jquery-match-height)
