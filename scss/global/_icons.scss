@@ -8,6 +8,12 @@
 		url('../fonts/icons.svg#icons') format('svg');
 }
 
+@each $icon, $content in $icons {
+  .icon-#{$icon}:before {
+    @include icon($content);
+  }
+}
+
 .icon:before {
 	font-family: "icons";
 		-webkit-font-smoothing: antialiased;

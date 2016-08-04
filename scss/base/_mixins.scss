@@ -13,10 +13,7 @@
 }
 
 // Variables for the icons are in the _variables partial
-// Example:
-// .foo:before {
-//   @include icon($i-arrow-rt);
-// }
+// This mixin is invoked by the each loop in _icons.scss, it should not be necessary to use it on its own.
 @mixin icon($symbol) {
   @extend %icon;
   content: $symbol;
