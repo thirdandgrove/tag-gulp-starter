@@ -9,7 +9,7 @@
 }
 
 @each $icon, $content in $icons {
-  .icon-#{$icon}:before {
+  .icon.icon-#{$icon}:before {
     @include icon($content);
   }
 }
