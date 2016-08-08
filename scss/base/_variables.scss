@@ -19,13 +19,12 @@ $bp-sm: 35em; //560px
 $bp-md: 60em; //960px
 $bp-lg: 75em; //1200px
 
-// Icon variables map
-// Add more as necessary, classes will be auto-generated for each with loop in _icons.scss.
-$icons: (
-  plus: \e900,
-  arrow-rt: \e901,
-  facebook: \e902,
-);
+// Icon variables
+// Icon variables should start with 'i-'
+// Adjust as needed
+$i-plus: '\e900';
+$i-arrow-rt: '\e901';
+$i-facebook: '\e902';
 
 // Z-index variables
 // Z-index variables should start with 'z-'
