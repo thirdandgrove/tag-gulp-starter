@@ -8,7 +8,6 @@ var gulp        = require('gulp'),
     notify      = require('gulp-notify'),
     postcss     = require('gulp-postcss'),
     imagemin    = require('gulp-imagemin'),
-    mustache    = require('gulp-mustache'),
     iconfont    = require('gulp-iconfont'),
     iconfontCSS = require('gulp-iconfont-css'),
     sourcemaps  = require('gulp-sourcemaps'),
@@ -47,10 +46,9 @@ gulp.task('iconfont', function() {
   gulp.src(['./images/svg/*.svg'])
     .pipe(iconfontCSS({
       fontName: fontName,
-      path: '../scss/templates/icons.mustache',
+      path: './scss/templates/icons.scss',
       targetPath: '../scss/global/_icons.scss',
       fontPath: '../fonts/',
-      engine: 'mustache',
     }))
     .pipe(iconfont({
       fontName: fontName,

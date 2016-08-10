@@ -1,38 +1,68 @@
 @font-face {
-	font-family: "icons";
-	src: url('../fonts/icons.eot');
-	src: url('../fonts/icons.eot?#iefix') format('eot'),
-		url('../fonts/icons.woff2') format('woff2'),
-		url('../fonts/icons.woff') format('woff'),
-		url('../fonts/icons.ttf') format('truetype'),
-		url('../fonts/icons.svg#icons') format('svg');
+  font-family: "icons";
+  src: url('../fonts/icons.eot');
+  src: url('../fonts/icons.eot?#iefix') format('eot'),
+    url('../fonts/icons.woff2') format('woff2'),
+    url('../fonts/icons.woff') format('woff'),
+    url('../fonts/icons.ttf') format('truetype'),
+    url('../fonts/icons.svg#icons') format('svg');
 }
 
-.icon:before {
-	font-family: "icons";
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: normal;
-	/* speak: none; only necessary if not using the private unicode range (firstGlyph option) */
-	text-decoration: none;
-	text-transform: none;
+@mixin icon-styles {
+  font-family: "icons";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  // speak: none; // only necessary if not using the private unicode range (firstGlyph option)
+  text-decoration: none;
+  text-transform: none;
 }
 
-
-.icon-error:before {
-	content: "\E001";
+%icon {
+  @include icon-styles;
 }
 
-.icon-info:before {
-	content: "\E002";
+@function icon-char($filename) {
+  $char: "";
+
+  @if $filename == error {
+    $char: "\E001";
+  }
+  @if $filename == info {
+    $char: "\E002";
+  }
+  @if $filename == triangle-down {
+    $char: "\E003";
+  }
+  @if $filename == triangle-up {
+    $char: "\E004";
+  }
+
+  @return $char;
 }
 
-.icon-triangle-down:before {
-	content: "\E003";
+@mixin icon($filename, $insert: before, $extend: true) {
+  &:#{$insert} {
+    @if $extend {
+      @extend %icon;
+    } @else {
+      @include icon-styles;
+    }
+    @inlcude icon(icon-char($filename));
+  }
 }
 
-.icon-triangle-up:before {
-	content: "\E004";
+.icon-error {
+  @include icon(error);
+}
+.icon-info {
+  @include icon(info);
+}
+.icon-triangle-down {
+  @include icon(triangle-down);
+}
+.icon-triangle-up {
+  @include icon(triangle-up);
 }
