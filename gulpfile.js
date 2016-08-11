@@ -7,10 +7,16 @@ var gulp        = require('gulp'),
     prefix      = require('autoprefixer'),
     notify      = require('gulp-notify'),
     postcss     = require('gulp-postcss'),
-    sourcemaps  = require('gulp-sourcemaps');
+    imagemin    = require('gulp-imagemin'),
+    iconfont    = require('gulp-iconfont'),
+    iconfontCSS = require('gulp-iconfont-css'),
+    sourcemaps  = require('gulp-sourcemaps'),
     cssnano     = require('gulp-cssnano');
 
 // @todo add LiveReload
+
+// Prefix with project code
+var fontName = 'icons';
 
 gulp.task('scss', function() {
   var onError = function(err) {
@@ -31,6 +37,29 @@ gulp.task('scss', function() {
     .pipe(gulp.dest('css'));
 });
 
+gulp.task('optimize-images', function() {
+  gulp.src('./images/**/*', {base: '.'})
+    .pipe(imagemin());
+});
+
+gulp.task('iconfont', function() {
+  gulp.src(['./images/svg/*.svg'])
+    .pipe(iconfontCSS({
+      fontName: fontName,
+      path: './scss/templates/icons.scss',
+      targetPath: '../scss/global/_icons.scss',
+      fontPath: '../fonts/',
+    }))
+    .pipe(iconfont({
+      fontName: fontName,
+      // Remove woff2 if you get an ext error on compile
+      formats: ['svg', 'ttf', 'eot', 'woff', 'woff2'],
+      normalize: true,
+      fontHeight: 1001
+    }))
+    .pipe(gulp.dest('./fonts/'));
+});
+
 gulp.task('jshint', function() { // @todo set up custom settings for this
   gulp.src('js/*.js')
     .pipe(jshint())
@@ -42,4 +71,5 @@ gulp.task('watch', function() {
   gulp.watch('js/*.js', ['jshint']);
 });
 
+gulp.task('icons', ['optimize-images', 'iconfont', 'scss']);
 gulp.task('default', ['scss', 'watch']);

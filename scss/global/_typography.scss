@@ -1,18 +1,6 @@
 // Global typography defaults. If these need to be overridden in a specific
 // instance, it should be done in a "components" partial
 
-// For use with icon fonts
-@font-face {
- font-family: 'icon';
- src:url('../fonts/example-icons/example-icons.eot');
- src:url('../fonts/example-icons/example-icons.eot?#iefix') format('embedded-opentype'),
-     url('../fonts/example-icons/example-icons.woff') format('woff'),
-     url('../fonts/example-icons/example-icons.ttf') format('truetype'),
-     url('../fonts/example-icons/example-icons.svg#icon') format('svg');
- font-weight: normal;
- font-style: normal;
-}
-
 body{
   font-family: $font-family-sans;
   font-size: ($font-size-base/16) * 100%;

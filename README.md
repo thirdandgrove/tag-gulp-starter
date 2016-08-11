@@ -13,11 +13,14 @@ TAG SCSS Starter w/ Gulp
 
 * In general, all units should use the `px-to-rem()` described in scss/base/_functions.scss
 * With rare case-by-case exceptions, bitmap sprites should never be used.
-* For single-color icons, create an icon font using [Icomoon](https://icomoon.io/), and create the generated font files and selection.json in the fonts folder. Pre-made icon fonts such as Iconic should not be used, as they contain many more icons than necessary for any given project.
 * For multi-color illustrations for which a bitmap sprite might often be used, use an SVG sprite instead if at all possible.
 * Do not nest your CSS selectors. While SCSS provides this functionality, it can easily get out of control creating hard-to-read code and unwieldy selectors.
 * All styling should be done mobile-first. This repo contains a mixin for the `min-width` media query only, which in the vast majority of cases should be all you need.
 * When in doubt, break your code out into its own partial. You can add partials by first creating the partial and then importing it from _components.scss, _base.scss, _layout.scss, or _global.scss. In the majority of cases, it will belong in components. Do not put partials outside of these folders.
+
+### Generating Icons
+* Add your icons to `images/svg/` and run the `gulp icons` task.
+  This will optimize your SVGs and create an icon font with scss partial. 
 
 ## Helpful References:
 * [SCSS basics](http://sass-lang.com/guide) and [full SCSS documentation](http://sass-lang.com/documentation/file.SASS_REFERENCE.html)
