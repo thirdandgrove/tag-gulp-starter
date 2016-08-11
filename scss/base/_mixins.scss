@@ -14,7 +14,7 @@
 
 // Variables for the icons are in the _variables partial
 // This mixin is invoked by the each loop in _icons.scss, it should not be necessary to use it on its own.
-@mixin icon($symbol) {
+@mixin icon-styles($symbol) {
   @extend %icon;
   content: $symbol;
 }
