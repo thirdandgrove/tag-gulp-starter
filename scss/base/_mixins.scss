@@ -27,3 +27,13 @@
 @mixin gradient-hor($color1, $color2) {
   background: linear-gradient(to right, $color1 0%, $color2 100%);
 }
+
+// Active states
+@mixin is-active {
+  &:hover,
+  &:active,
+  &:focus,
+  &.active {
+    @content;
+  }
+} 
