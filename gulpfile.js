@@ -11,9 +11,11 @@ var gulp        = require('gulp'),
     iconfont    = require('gulp-iconfont'),
     iconfontCSS = require('gulp-iconfont-css'),
     sourcemaps  = require('gulp-sourcemaps'),
-    cssnano     = require('gulp-cssnano');
+    cssnano     = require('gulp-cssnano'),
+    livereload  = require('gulp-livereload');
 
-// @todo add LiveReload
+// LiveReload requires the browser plugin to automatically watch
+// for changes and update.
 
 // Prefix with project code
 var fontName = 'icons';
@@ -34,7 +36,8 @@ gulp.task('scss', function() {
     .pipe(cssnano())
     .pipe(sourcemaps.write())
     .pipe(postcss([ prefix({ browsers: ['last 2 versions'], cascade: false }) ]))
-    .pipe(gulp.dest('css'));
+    .pipe(gulp.dest('css'))
+    .pipe(livereload());
 });
 
 gulp.task('optimize-images', function() {
@@ -67,6 +70,7 @@ gulp.task('jshint', function() { // @todo set up custom settings for this
 });
 
 gulp.task('watch', function() {
+  livereload.listen();
   gulp.watch('scss/**/*.scss', ['scss']);
   gulp.watch('js/*.js', ['jshint']);
 });
