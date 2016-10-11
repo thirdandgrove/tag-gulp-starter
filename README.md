@@ -9,6 +9,8 @@ TAG SCSS Starter w/ Gulp
 4. To continually watch .scss and .js files for changes, type `gulp` and use `ctrl + C` to stop.
 5. To run a one-time compilation of .scss files, type `gulp scss`
 
+*Note:* You'll need the [livereload browser extension](http://livereload.com/extensions/) to automatically refresh on changes.
+
 ## Guidelines:
 
 * In general, all units should use the `px-to-rem()` described in scss/base/_functions.scss
