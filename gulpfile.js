@@ -21,18 +21,14 @@ var gulp        = require('gulp'),
 var fontName = 'icons';
 
 gulp.task('scss', function() {
-  var onError = function(err) {
-    notify.onError({
-      title:    "Gulp",
-      subtitle: "Failure!",
-      message:  "Error: <%= error.message %>"
-    })(err);
-    this.emit('end'); // @todo see if it works without this
-  };
-
   return gulp.src('scss/styles.scss')
     .pipe(sourcemaps.init())
     .pipe(sass())
+    .on('error', notify.onError({
+      title:    "Gulp",
+      subtitle: "Failure!",
+      message:  "Error: <%= error.message %>"
+    }))
     .pipe(cssnano())
     .pipe(sourcemaps.write())
     .pipe(postcss([ prefix({ browsers: ['last 2 versions'], cascade: false }) ]))
