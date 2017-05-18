@@ -16,18 +16,18 @@ TAG SCSS Starter w/ Gulp
 * In general, all units should use the `px-to-rem()` described in scss/base/_functions.scss
 * With rare case-by-case exceptions, bitmap sprites should never be used.
 * For multi-color illustrations for which a bitmap sprite might often be used, use an SVG sprite instead if at all possible.
-* Do not nest your CSS selectors. While SCSS provides this functionality, it can easily get out of control creating hard-to-read code and unwieldy selectors.
+* Do not nest your CSS selectors, except for states (:hover, etc.), pseudoelements(:before, :after), or pseudo-selectors (:nth-child, etc.). While SCSS provides this functionality, it can easily get out of control creating hard-to-read code and unwieldy selectors.
 * All styling should be done mobile-first. This repo contains a mixin for the `min-width` media query only, which in the vast majority of cases should be all you need.
 * When in doubt, break your code out into its own partial. You can add partials by first creating the partial and then importing it from _components.scss, _base.scss, _layout.scss, or _global.scss. In the majority of cases, it will belong in components. Do not put partials outside of these folders.
+* [View the full TAG Front-End Best Practices](https://thirdandgrove.atlassian.net/wiki/display/TAGCo/Front+End+Best+Practices)
 
 ### Generating Icons
 * Add your icons to `images/svg/` and run the `gulp icons` task.
-  This will optimize your SVGs and create an icon font with scss partial. 
+  This will optimize your SVGs and create an icon font with scss partial.
+* Tip: If your icons seem tiny or invisible despite normal font sizes, make sure that none of the svg files have `width="100%"` and/or `height="100%"` on the `<svg>` tag.
 
 ## Helpful References:
 * [SCSS basics](http://sass-lang.com/guide) and [full SCSS documentation](http://sass-lang.com/documentation/file.SASS_REFERENCE.html)
-* [Icomoon documentation](https://icomoon.io/#docs)
 
 ## Frequently Used JS Libraries:
 * [Owl carousel](http://www.owlcarousel.owlgraphic.com/) and its [documentation](http://www.owlcarousel.owlgraphic.com/docs/api-options.html)
-* [MatchHeight](https://github.com/liabru/jquery-match-height)

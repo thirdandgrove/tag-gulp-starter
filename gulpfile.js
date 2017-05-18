@@ -29,7 +29,7 @@ gulp.task('scss', function() {
       subtitle: "Failure!",
       message:  "Error: <%= error.message %>"
     }))
-    .pipe(cssnano())
+    .pipe(cssnano({zindex: false}))
     .pipe(sourcemaps.write())
     .pipe(postcss([ prefix({ browsers: ['last 2 versions'], cascade: false }) ]))
     .pipe(gulp.dest('css'))
