@@ -2,10 +2,12 @@
 // instance, it should be done in a "components" partial
 
 body{
-  font-family: $font-family-sans;
+  // You should ALWAYS have this line, unchanged
   font-size: ($font-size-base/16) * 100%;
-  font-weight: $font-weight-normal;
-  color: $c-text;
+  // Will probably also declare fonts, colors, etc. as desired. Examples:
+  // font-family: $font-family-sans;
+  // font-weight: $font-weight-normal;
+  // color: $c-black;
 }
 
 h1 {
@@ -58,7 +60,7 @@ dd {
 
 b,
 strong {
-  font-weight: $font-weight-bold;
+  // font-weight: $font-weight-bold;
 }
 
 i,

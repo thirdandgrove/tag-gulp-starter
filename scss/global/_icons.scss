@@ -11,17 +11,26 @@
 @function icon-char($filename) {
   $char: "";
 
-  @if $filename == error {
+  @if $filename == facebook {
     $char: "\E001";
   }
-  @if $filename == info {
+  @if $filename == googleplus {
     $char: "\E002";
   }
-  @if $filename == triangle-down {
+  @if $filename == instagram {
     $char: "\E003";
   }
-  @if $filename == triangle-up {
+  @if $filename == linkedin {
     $char: "\E004";
+  }
+  @if $filename == pinterest {
+    $char: "\E005";
+  }
+  @if $filename == twitter {
+    $char: "\E006";
+  }
+  @if $filename == youtube {
+    $char: "\E007";
   }
 
   @return $char;
@@ -33,15 +42,24 @@
   }
 }
 
-.icon-error {
-  @include icon(error);
+.icon-facebook {
+  @include icon(facebook);
 }
-.icon-info {
-  @include icon(info);
+.icon-googleplus {
+  @include icon(googleplus);
 }
-.icon-triangle-down {
-  @include icon(triangle-down);
+.icon-instagram {
+  @include icon(instagram);
 }
-.icon-triangle-up {
-  @include icon(triangle-up);
+.icon-linkedin {
+  @include icon(linkedin);
+}
+.icon-pinterest {
+  @include icon(pinterest);
+}
+.icon-twitter {
+  @include icon(twitter);
+}
+.icon-youtube {
+  @include icon(youtube);
 }
