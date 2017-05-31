@@ -10,6 +10,10 @@ textarea {
   max-width: 100%;
   font-family: $font-family-sans;
   font-size: px-to-rem(16);
+
+  @include placeholder {
+    // Probably a different color
+  }
 }
 
 input:focus,
