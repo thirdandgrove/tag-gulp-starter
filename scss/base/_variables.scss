@@ -1,30 +1,39 @@
 // Colors variables
 // Color variables should start with 'c-'
-$c-black: #000000;
-$c-white: #ffffff;
-$c-whatever: #ff0000;
-$c-text: $c-black; // etc.
+// It may often be helpful to include the RGB values in a comment next to each
+// for ease of interpretation when prototypes use RGB or RGBA
+// Examples:
+$c-black: #000000; // RGB 0 0 0
+$c-white: #ffffff; // RGB 255 255 255
+$c-whatever: #ff0000; // RGB 255, 0, 0
+// ...etc.
+
+$social-colors: (
+  twitter: #4099ff,
+  linkedin: #0077b5,
+  facebook: #3B5998,
+  googleplus: #C63D2D,
+  pinterest: #cb2027,
+  youtube: #cd201f,
+  instagram: #fb3958
+);
 
 // Font-related variables
 // Font variables should start with 'font-'
+// Replace any/all values as appropriate
 $font-family-serif: 'Georgia', serif;
 $font-family-sans: 'Helvetica', sans-serif;
-$font-size-base: 16; // The default font size for your site
+$font-size-base: 16; // The default font size for your site. This gets used in
+// the px-to-em() function used sitewide.
 $font-weight-normal: 400;
 $font-weight-bold: 700;
 
 // Breakpoint variables
 // Breakpoint variables should start with 'bp-'
+// Examples, change as necessary:
 $bp-sm: 35em; //560px
 $bp-md: 60em; //960px
 $bp-lg: 75em; //1200px
-
-// Icon variables
-// Icon variables should start with 'i-'
-// Adjust as needed
-$i-plus: '\e900';
-$i-arrow-rt: '\e901';
-$i-facebook: '\e902';
 
 // Z-index variables
 // Z-index variables should start with 'z-'
@@ -39,7 +48,7 @@ $z-8: 800;
 $z-9: 900;
 $z-10: 1000;
 
-// Commonalities to keep consistent across the site
-$border-radius: 5px;
-$transition: all 0.3s ease;
-$box-shadow: 0px 4px 4px 0px rgba($c-black, 0.25);
+// Examples of commonalities to keep consistent across the site
+// $border-radius: 5px;
+// $transition: all 0.3s ease;
+// $box-shadow: 0px 4px 4px 0px rgba($c-black, 0.25);
