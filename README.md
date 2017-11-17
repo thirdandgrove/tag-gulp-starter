@@ -21,6 +21,11 @@ TAG SCSS Starter w/ Gulp
 * When in doubt, break your code out into its own partial. You can add partials by first creating the partial and then importing it from _components.scss, _base.scss, _layout.scss, or _global.scss. In the majority of cases, it will belong in components. Do not put partials outside of these folders.
 * [View the full TAG Front-End Best Practices](https://thirdandgrove.atlassian.net/wiki/display/TAGCo/Front+End+Best+Practices)
 
+## Grid:
+
+* We have Susy 3 included in this repo. You can customize it as needed. See the documentation at [http://oddbird.net/susy/docs](http://oddbird.net/susy/docs)
+* Unfortunately, Susy doesn't seem to want to play nicely with the sourcemaps, so we've commented them out of the gulpfile for the time being. If you're not using Susy, feel free to uncomment them.
+
 ### Generating Icons
 * Add your icons to `images/svg/` and run the `gulp icons` task.
   This will optimize your SVGs and create an icon font with scss partial.

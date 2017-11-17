@@ -48,6 +48,15 @@ $z-8: 800;
 $z-9: 900;
 $z-10: 1000;
 
+// Susy grid default example
+// See documentation at http://oddbird.net/susy/docs/
+$susy: (
+  'columns': susy-repeat(12),
+  'gutters': 0.25,
+  'spread': 'narrow',
+  'container-spread': 'narrow',
+);
+
 // Examples of commonalities to keep consistent across the site
 // $border-radius: 5px;
 // $transition: all 0.3s ease;

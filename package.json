@@ -18,6 +18,7 @@
     "gulp-sass": "^2.1.1",
     "gulp-sass-lint": "^1.1.1",
     "gulp-sourcemaps": "^1.6.0",
-    "jshint": "^2.9.1"
+    "jshint": "^2.9.1",
+    "susy": "^3.0.1"
   }
 }

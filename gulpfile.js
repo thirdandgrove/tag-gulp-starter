@@ -22,15 +22,17 @@ var fontName = 'icons';
 
 gulp.task('scss', function() {
   return gulp.src('scss/styles.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass())
+    // .pipe(sourcemaps.init())
+    .pipe(sass({
+      includePaths: ['node_modules/susy/sass']
+    }))
     .on('error', notify.onError({
       title:    "Gulp",
       subtitle: "Failure!",
       message:  "Error: <%= error.message %>"
     }))
     .pipe(cssnano({zindex: false}))
-    .pipe(sourcemaps.write())
+    // .pipe(sourcemaps.write())
     .pipe(postcss([ prefix({ browsers: ['last 2 versions'], cascade: false }) ]))
     .pipe(gulp.dest('css'))
     .pipe(livereload());
