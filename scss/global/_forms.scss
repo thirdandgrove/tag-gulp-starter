@@ -49,6 +49,7 @@ label {
 
 }
 
+// sass-lint:disable no-important
 fieldset {
   min-width: 0 !important; // Override for Firefox silliness
 }
@@ -56,3 +57,4 @@ fieldset {
 legend {
 
 }
+

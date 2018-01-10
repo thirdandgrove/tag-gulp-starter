@@ -31,6 +31,13 @@ TAG SCSS Starter w/ Gulp
   This will optimize your SVGs and create an icon font with scss partial.
 * Tip: If your icons seem tiny or invisible despite normal font sizes, make sure that none of the svg files have `width="100%"` and/or `height="100%"` on the `<svg>` tag.
 
+### Sass-lint
+Sass-lint accepts `YML` or `JSON` files. Config needs to be in project root unless you specify in `package.json`.
+
+If you need to ignore a rule use: `// sass-lint:disable <rule>, <rule>` and include a reason.
+
+[Docs here](https://github.com/sasstools/sass-lint/tree/develop/docs)
+
 ## Helpful References:
 * [SCSS basics](http://sass-lang.com/guide) and [full SCSS documentation](http://sass-lang.com/documentation/file.SASS_REFERENCE.html)
 
