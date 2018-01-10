@@ -49,6 +49,7 @@ label {
 
 }
 
+// sass-lint:disable no-important
 fieldset {
   min-width: 0 !important; // Override for Firefox silliness
 }
@@ -57,8 +58,3 @@ legend {
 
 }
 
-body{
-  background:blue;
-  @include gradient-hor(blue, green);
-  @extend %numbers;
-}

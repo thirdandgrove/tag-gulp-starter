@@ -20,7 +20,7 @@ var gulp        = require('gulp'),
 // Prefix with project code
 var fontName = 'icons';
 
-gulp.task('scss', function() {
+gulp.task('scss', ['scsslint'], function() {
   return gulp.src('scss/styles.scss')
     // .pipe(sourcemaps.init())
     .pipe(sass({
@@ -59,6 +59,17 @@ gulp.task('iconfont', function() {
       fontHeight: 1001
     }))
     .pipe(gulp.dest('./fonts/'));
+});
+
+gulp.task('scsslint', function () {
+  return gulp.src('scss/**/*.scss')
+    .pipe(scsslint({
+      options: {
+        configFile: 'sass-lint.yml'
+      }
+    }))
+    .pipe(scsslint.format())
+    .pipe(scsslint.failOnError())
 });
 
 gulp.task('jshint', function() { // @todo set up custom settings for this
