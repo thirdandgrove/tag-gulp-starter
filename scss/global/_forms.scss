@@ -56,3 +56,9 @@ fieldset {
 legend {
 
 }
+
+body{
+  background:blue;
+  @include gradient-hor(blue, green);
+  @extend %numbers;
+}

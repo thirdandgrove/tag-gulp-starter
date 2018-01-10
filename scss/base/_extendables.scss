@@ -22,7 +22,7 @@
 
 // Use the mixin for this; this is for the mixin to call ONLY
 %icon {
-  font-family: 'icons'; //declared in the icons partial
+  font-family: $font-family-icons;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
