@@ -1,10 +1,13 @@
 // Global typography defaults. If these need to be overridden in a specific
 // instance, it should be done in a "components" partial
-
-body{
-  // You should ALWAYS have this line, unchanged
+html {
+  // You should ALWAYS have this line, unchanged.
+  // The px-to-rem function depends on it.
   font-size: ($font-size-base/16) * 100%;
-  // Will probably also declare fonts, colors, etc. as desired. Examples:
+}
+
+body {
+  // Will probably declare fonts, colors, etc. as desired. Examples:
   // font-family: $font-family-sans;
   // font-weight: $font-weight-normal;
   // color: $c-black;
