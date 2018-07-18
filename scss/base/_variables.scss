@@ -31,11 +31,12 @@ $font-weight-normal: 400;
 $font-weight-bold: 700;
 
 // Breakpoint variables
-// Breakpoint variables should start with 'bp-'
-// Examples, change as necessary:
-$bp-sm: 35em; //560px
-$bp-md: 60em; //960px
-$bp-lg: 75em; //1200px
+// Used in bp mixin in _mixins.scss
+$breakpoints: (
+  sm: 480px,
+  md: 768px,
+  lg: 960px
+);
 
 // Z-index variables
 // Z-index variables should start with 'z-'

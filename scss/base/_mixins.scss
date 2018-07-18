@@ -2,13 +2,23 @@
 // Example:
 // .foo {
 //   width: 100%;
-//   @include breakpoint($bp-sm) {
+//
+//   @include bp(sm) {
 //     width: 50%;
 //   }
 // }
-@mixin breakpoint($bp) {
-  @media (min-width: #{$bp}) {
-    @content;
+@mixin bp($breakpoint) {
+  // Goes to $breakpoints map and gets each $breakpoint value (if it has any)
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    // Create media query based on that $breakpoint value
+    @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+      @content;
+    }
+
+  }
+  @else {
+    @warn "Breakpoint doesn't exist please check breakpoints map.";
   }
 }
 
