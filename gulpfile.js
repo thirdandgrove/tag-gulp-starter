@@ -1,7 +1,7 @@
 var gulp        = require('gulp'),
     sass        = require('gulp-sass'),
     rename      = require('gulp-rename'),
-    jshint      = require('gulp-jshint'),
+    eslint      = require('gulp-eslint'),
     scsslint    = require('gulp-sass-lint'),
     cache       = require('gulp-cached'),
     prefix      = require('autoprefixer'),
@@ -34,8 +34,7 @@ gulp.task('scss', ['scsslint'], function() {
     .pipe(cssnano({zindex: false}))
     // .pipe(sourcemaps.write())
     .pipe(postcss([ prefix({ browsers: ['last 2 versions'], cascade: false }) ]))
-    .pipe(gulp.dest('css'))
-    .pipe(livereload());
+    .pipe(gulp.dest('css'));
 });
 
 gulp.task('optimize-images', function() {
@@ -72,14 +71,18 @@ gulp.task('scsslint', function () {
     .pipe(scsslint.failOnError())
 });
 
-gulp.task('jshint', function() { // @todo set up custom settings for this
+gulp.task('eslint', function() {
   gulp.src('js/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    .pipe(eslint({
+      rules: {
+        'no-mutable-exports': 0
+      }
+    }))
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('watch', function() {
-  livereload.listen();
   gulp.watch('scss/**/*.scss', ['scss']);
   gulp.watch('js/*.js', ['jshint']);
 });
