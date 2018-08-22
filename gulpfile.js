@@ -11,8 +11,7 @@ var gulp        = require('gulp'),
     iconfont    = require('gulp-iconfont'),
     iconfontCSS = require('gulp-iconfont-css'),
     sourcemaps  = require('gulp-sourcemaps'),
-    cssnano     = require('gulp-cssnano'),
-    livereload  = require('gulp-livereload');
+    cssnano     = require('gulp-cssnano');
 
 // LiveReload requires the browser plugin to automatically watch
 // for changes and update.
@@ -84,7 +83,7 @@ gulp.task('eslint', function() {
 
 gulp.task('watch', function() {
   gulp.watch('scss/**/*.scss', ['scss']);
-  gulp.watch('js/*.js', ['jshint']);
+  gulp.watch('js/*.js', ['eslint']);
 });
 
 gulp.task('icons', ['optimize-images', 'iconfont', 'scss']);
