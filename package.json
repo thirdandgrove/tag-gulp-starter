@@ -1,6 +1,6 @@
 {
   "name": "tag-gulp-starter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "sasslintConfig": "sass-lint.yml",
   "dependencies": {},
   "devDependencies": {
@@ -17,8 +17,6 @@
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^2.1.1",
     "gulp-sass-lint": "^1.4.0",
-    "gulp-sourcemaps": "^1.12.1",
-    "jshint": "^2.9.6",
-    "susy": "^3.0.5"
+    "gulp-sourcemaps": "^1.12.1"
   }
 }
