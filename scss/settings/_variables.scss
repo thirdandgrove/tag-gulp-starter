@@ -33,23 +33,21 @@ $font-weight-bold: 700;
 // Breakpoint variables
 // Used in bp mixin in _mixins.scss
 $breakpoints: (
-  sm: 480px,
-  md: 768px,
-  lg: 960px
+  sm: px-to-rem(480),
+  md: px-to-rem(768),
+  lg: px-to-rem(960)
 );
 
 // Z-index variables
-// Z-index variables should start with 'z-'
-$z-1: 100;
-$z-2: 200;
-$z-3: 300;
-$z-4: 400;
-$z-5: 500;
-$z-6: 600;
-$z-7: 700;
-$z-8: 800;
-$z-9: 900;
-$z-10: 1000;
+// Use with z() function like this:
+// z-index: z(under);
+$z-layers: (
+  under: -1,
+  default: 1,
+  layer-2: 2,
+  layer-3: 3,
+  overlay: 900
+);
 
 // Examples of commonalities to keep consistent across the site
 // $border-radius: 5px;
