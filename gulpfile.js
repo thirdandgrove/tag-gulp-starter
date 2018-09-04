@@ -1,20 +1,22 @@
-var gulp        = require('gulp'),
-    sass        = require('gulp-sass'),
-    rename      = require('gulp-rename'),
-    eslint      = require('gulp-eslint'),
-    scsslint    = require('gulp-sass-lint'),
-    cache       = require('gulp-cached'),
-    prefix      = require('autoprefixer'),
-    notify      = require('gulp-notify'),
-    postcss     = require('gulp-postcss'),
-    imagemin    = require('gulp-imagemin'),
-    iconfont    = require('gulp-iconfont'),
-    iconfontCSS = require('gulp-iconfont-css'),
-    sourcemaps  = require('gulp-sourcemaps'),
-    cssnano     = require('gulp-cssnano');
-
-// LiveReload requires the browser plugin to automatically watch
-// for changes and update.
+var gulp         = require('gulp'),
+    sass         = require('gulp-sass'),
+    eslint       = require('gulp-eslint'),
+    scsslint     = require('gulp-sass-lint'),
+    cache        = require('gulp-cached'),
+    prefix       = require('autoprefixer'),
+    notify       = require('gulp-notify'),
+    postcss      = require('gulp-postcss'),
+    imagemin     = require('gulp-imagemin'),
+    iconfont     = require('gulp-iconfont'),
+    iconfontCSS  = require('gulp-iconfont-css'),
+    sourcemaps   = require('gulp-sourcemaps'),
+    cssnano      = require('gulp-cssnano'),
+    plumber      = require('gulp-plumber'),
+    sassGlob     = require('gulp-sass-glob'),
+    babel        = require('gulp-babel'),
+    browserSync  = require('browser-sync'),
+    reload       = browserSync.reload,
+    runTimestamp = Math.round(Date.now() / 1000);
 
 // Prefix with project code
 var fontName = 'icons';
@@ -64,13 +66,16 @@ gulp.task('iconfont', () => {
       path: './scss/templates/icons.scss',
       targetPath: '../scss/global/_icons.scss',
       fontPath: '../fonts/',
+      cacheBuster: runTimestamp
     }))
     .pipe(iconfont({
       fontName: fontName,
       // Remove woff2 if you get an ext error on compile
       formats: ['svg', 'ttf', 'eot', 'woff', 'woff2'],
       normalize: true,
-      fontHeight: 1001
+      fontHeight: 1001,
+      prependUnicode: true,
+      timestamp: runTimestamp,
     }))
     .pipe(gulp.dest('./fonts/'));
 });
@@ -109,7 +114,7 @@ gulp.task('scripts', () => {
       .pipe(plumber({ errorHandler: function(err) {
         notify.onError({
           title: "Gulp error in " + err.plugin,
-          message:  err.toString()
+          message: err.toString()
         })(err);
         beeper();
       }}))
@@ -133,7 +138,7 @@ gulp.task('browser-sync', () => {
 });
 
 gulp.task('watch', () => {
-  gulp.watch(paths.styles, ['scss']);
+  gulp.watch(paths.styles, ['scss']).on('change',reload);
   gulp.watch(paths.scripts, ['scripts', 'eslint']).on('change', reload);
 });
 
