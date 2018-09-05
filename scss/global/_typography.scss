@@ -103,7 +103,7 @@ sub {
 
 // Undoing the ugly blue glow that defaults when you focus on a link or anything
 // with a tabindex. Put focus state back on links below.
-*:focus {
+:focus {
   outline: none;
 }
 
