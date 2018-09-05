@@ -16,6 +16,7 @@ var gulp         = require('gulp'),
     babel        = require('gulp-babel'),
     browserSync  = require('browser-sync'),
     reload       = browserSync.reload,
+    beeper       = require('beeper'),
     runTimestamp = Math.round(Date.now() / 1000);
 
 // Prefix with project code
