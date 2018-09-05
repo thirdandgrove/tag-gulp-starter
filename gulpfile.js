@@ -1,66 +1,88 @@
-var gulp        = require('gulp'),
-    sass        = require('gulp-sass'),
-    rename      = require('gulp-rename'),
-    eslint      = require('gulp-eslint'),
-    scsslint    = require('gulp-sass-lint'),
-    cache       = require('gulp-cached'),
-    prefix      = require('autoprefixer'),
-    notify      = require('gulp-notify'),
-    postcss     = require('gulp-postcss'),
-    imagemin    = require('gulp-imagemin'),
-    iconfont    = require('gulp-iconfont'),
-    iconfontCSS = require('gulp-iconfont-css'),
-    sourcemaps  = require('gulp-sourcemaps'),
-    cssnano     = require('gulp-cssnano');
-
-// LiveReload requires the browser plugin to automatically watch
-// for changes and update.
+var gulp         = require('gulp'),
+    sass         = require('gulp-sass'),
+    eslint       = require('gulp-eslint'),
+    scsslint     = require('gulp-sass-lint'),
+    cache        = require('gulp-cached'),
+    prefix       = require('autoprefixer'),
+    notify       = require('gulp-notify'),
+    postcss      = require('gulp-postcss'),
+    imagemin     = require('gulp-imagemin'),
+    iconfont     = require('gulp-iconfont'),
+    iconfontCSS  = require('gulp-iconfont-css'),
+    sourcemaps   = require('gulp-sourcemaps'),
+    cssnano      = require('gulp-cssnano'),
+    plumber      = require('gulp-plumber'),
+    sassGlob     = require('gulp-sass-glob'),
+    babel        = require('gulp-babel'),
+    browserSync  = require('browser-sync'),
+    reload       = browserSync.reload,
+    beeper       = require('beeper'),
+    runTimestamp = Math.round(Date.now() / 1000);
 
 // Prefix with project code
 var fontName = 'icons';
 
-gulp.task('scss', ['scsslint'], function() {
+// Paths
+var paths = {
+  styles: [
+    'scss/**/*.scss'
+  ],
+  scripts: [
+    'js/*.js'
+  ]
+}
+
+gulp.task('scss', ['scsslint'], () => {
   return gulp.src('scss/styles.scss')
-    // .pipe(sourcemaps.init())
-    .pipe(sass({
-      includePaths: ['node_modules/susy/sass']
-    }))
-    .on('error', notify.onError({
-      title:    "Gulp",
-      subtitle: "Failure!",
-      message:  "Error: <%= error.message %>"
-    }))
+    .pipe(plumber({ errorHandler: function(err) {
+      notify.onError({
+        title: "Gulp error in " + err.plugin,
+        message:  err.toString()
+      })(err);
+      beeper();
+    }}))
+    .pipe(sourcemaps.init())
+    .pipe(sassGlob())
+    .pipe(sass({outputStyle: 'compressed'}))
     .pipe(cssnano({zindex: false}))
-    // .pipe(sourcemaps.write())
-    .pipe(postcss([ prefix({ browsers: ['last 2 versions'], cascade: false }) ]))
-    .pipe(gulp.dest('css'));
+    .pipe(postcss([
+      prefix({
+        browsers: ['last 3 versions'],
+        cascade: false })
+      ]))
+    .pipe(sourcemaps.write('../css/maps'))
+    .pipe(gulp.dest('css'))
+    .pipe(reload({stream:true}));
 });
 
-gulp.task('optimize-images', function() {
+gulp.task('optimize-images', () => {
   gulp.src('./images/**/*', {base: '.'})
     .pipe(imagemin());
 });
 
-gulp.task('iconfont', function() {
+gulp.task('iconfont', () => {
   gulp.src(['./images/svg/*.svg'])
     .pipe(iconfontCSS({
       fontName: fontName,
       path: './scss/templates/icons.scss',
       targetPath: '../scss/global/_icons.scss',
       fontPath: '../fonts/',
+      cacheBuster: runTimestamp
     }))
     .pipe(iconfont({
       fontName: fontName,
       // Remove woff2 if you get an ext error on compile
       formats: ['svg', 'ttf', 'eot', 'woff', 'woff2'],
       normalize: true,
-      fontHeight: 1001
+      fontHeight: 1001,
+      prependUnicode: true,
+      timestamp: runTimestamp,
     }))
     .pipe(gulp.dest('./fonts/'));
 });
 
-gulp.task('scsslint', function () {
-  return gulp.src('scss/**/*.scss')
+gulp.task('scsslint', () => {
+  return gulp.src(paths.styles)
     .pipe(scsslint({
       options: {
         configFile: 'sass-lint.yml'
@@ -70,21 +92,56 @@ gulp.task('scsslint', function () {
     .pipe(scsslint.failOnError())
 });
 
-gulp.task('eslint', function() {
-  gulp.src('js/*.js')
+gulp.task('eslint', () => {
+  gulp.src(paths.scripts)
     .pipe(eslint({
+      parser: 'babel-eslint',
       rules: {
-        'no-mutable-exports': 0
-      }
+        'no-mutable-exports': 0,
+      },
+      globals: [
+        'jQuery',
+        '$',
+      ],
+      envs: [
+        'browser',
+      ]
     }))
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+    .pipe(eslint.format());
 });
 
-gulp.task('watch', function() {
-  gulp.watch('scss/**/*.scss', ['scss']);
-  gulp.watch('js/*.js', ['eslint']);
+gulp.task('scripts', () => {
+  gulp.src(paths.scripts)
+      .pipe(plumber({ errorHandler: function(err) {
+        notify.onError({
+          title: "Gulp error in " + err.plugin,
+          message: err.toString()
+        })(err);
+        beeper();
+      }}))
+      .pipe(babel({
+        presets: ['env'],
+      }))
+      .pipe(plumber())
+      .pipe(sourcemaps.init())
+      .pipe(sourcemaps.write('./maps'))
+      .pipe(gulp.dest('js/dist'))
+      .pipe(reload({stream:true}));
+});
+
+// Browser Sync
+gulp.task('browser-sync', () => {
+  browserSync({
+    proxy: {
+      target: "http://local.yourlocal.com"
+    }
+  });
+});
+
+gulp.task('watch', () => {
+  gulp.watch(paths.styles, ['scss']).on('change',reload);
+  gulp.watch(paths.scripts, ['scripts', 'eslint']).on('change', reload);
 });
 
 gulp.task('icons', ['optimize-images', 'iconfont', 'scss']);
-gulp.task('default', ['scss', 'watch']);
+gulp.task('default', ['scss', 'browser-sync', 'watch']);

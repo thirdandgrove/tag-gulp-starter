@@ -1,5 +1,10 @@
-@import 'susy';
-@import 'base/base';
-@import 'global/global';
-@import 'layout/layout';
-@import 'components/components';
+@import "settings/**/*.scss";
+
+// Order matters and icon mixin depends on extends.
+@import "utils/functions";
+@import "utils/extendables";
+@import "utils/mixins";
+
+@import "global/**/*.scss";
+@import "layout/**/*.scss";
+@import "components/**/*.scss";
