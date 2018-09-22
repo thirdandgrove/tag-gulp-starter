@@ -4,7 +4,7 @@
   "sasslintConfig": "sass-lint.yml",
   "dependencies": {},
   "devDependencies": {
-    "autoprefixer": "^6.3.6",
+    "autoprefixer": "^9.1.5",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
     "babel-preset-env": "^1.7.0",
@@ -17,14 +17,14 @@
     "gulp-eslint": "^5.0.0",
     "gulp-iconfont": "^10.0.1",
     "gulp-iconfont-css": "^2.3.0",
-    "gulp-imagemin": "^3.0.2",
-    "gulp-notify": "^2.2.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-notify": "^3.2.0",
     "gulp-plumber": "^1.2.0",
-    "gulp-postcss": "^6.1.0",
+    "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "^2.1.1",
+    "gulp-sass": "^4.0.1",
     "gulp-sass-glob": "^1.0.9",
     "gulp-sass-lint": "^1.4.0",
-    "gulp-sourcemaps": "^1.12.1"
+    "gulp-sourcemaps": "^2.6.4"
   }
 }

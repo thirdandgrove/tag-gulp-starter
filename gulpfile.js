@@ -61,8 +61,7 @@ gulp.task('scss', () => {
 });
 
 gulp.task("scsslint", () => {
-  return gulp
-    .src(paths.styles)
+  return gulp.src(paths.styles)
     .pipe(
       scsslint({
         options: {
@@ -75,12 +74,12 @@ gulp.task("scsslint", () => {
 });
 
 gulp.task('optimize-images', () => {
-  gulp.src(paths.images.src, {base: '.'})
+  return gulp.src(paths.images.src, {base: '.'})
     .pipe(imagemin());
 });
 
 gulp.task('iconfont', () => {
-  gulp.src(paths.images.svg)
+  return gulp.src(paths.images.svg)
     .pipe(iconfontCSS({
       fontName: fontName,
       path: './scss/templates/icons.scss',
@@ -119,7 +118,7 @@ gulp.task('eslint', () => {
 });
 
 gulp.task('scripts', () => {
-  gulp.src(paths.scripts)
+  return gulp.src(paths.scripts)
       .pipe(plumber({ errorHandler: function(err) {
         notify.onError({
           title: "Gulp error in " + err.plugin,
