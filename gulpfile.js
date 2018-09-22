@@ -29,10 +29,15 @@ var paths = {
   ],
   scripts: [
     'js/*.js'
-  ]
+  ],
+  images: {
+    src: './images/**/*',
+    svg: './images/svg/*.svg'
+  }
 }
 
-gulp.task('scss', ['scsslint'], () => {
+
+gulp.task('scss', () => {
   return gulp.src('scss/styles.scss')
     .pipe(plumber({ errorHandler: function(err) {
       notify.onError({
@@ -55,13 +60,27 @@ gulp.task('scss', ['scsslint'], () => {
     .pipe(reload({stream:true}));
 });
 
+gulp.task("scsslint", () => {
+  return gulp
+    .src(paths.styles)
+    .pipe(
+      scsslint({
+        options: {
+          configFile: "sass-lint.yml"
+        }
+      })
+    )
+    .pipe(scsslint.format())
+    .pipe(scsslint.failOnError());
+});
+
 gulp.task('optimize-images', () => {
-  gulp.src('./images/**/*', {base: '.'})
+  gulp.src(paths.images.src, {base: '.'})
     .pipe(imagemin());
 });
 
 gulp.task('iconfont', () => {
-  gulp.src(['./images/svg/*.svg'])
+  gulp.src(paths.images.svg)
     .pipe(iconfontCSS({
       fontName: fontName,
       path: './scss/templates/icons.scss',
@@ -79,17 +98,6 @@ gulp.task('iconfont', () => {
       timestamp: runTimestamp,
     }))
     .pipe(gulp.dest('./fonts/'));
-});
-
-gulp.task('scsslint', () => {
-  return gulp.src(paths.styles)
-    .pipe(scsslint({
-      options: {
-        configFile: 'sass-lint.yml'
-      }
-    }))
-    .pipe(scsslint.format())
-    .pipe(scsslint.failOnError())
 });
 
 gulp.task('eslint', () => {
@@ -138,10 +146,12 @@ gulp.task('browser-sync', () => {
   });
 });
 
+gulp.task('styles', gulp.series('scss', 'scsslint'));
+
 gulp.task('watch', () => {
-  gulp.watch(paths.styles, ['scss']).on('change',reload);
-  gulp.watch(paths.scripts, ['scripts', 'eslint']).on('change', reload);
+  gulp.watch(paths.styles, gulp.series('styles')).on('change', reload);
+  gulp.watch(paths.scripts, gulp.series('scripts', 'eslint')).on('change', reload);
 });
 
-gulp.task('icons', ['optimize-images', 'iconfont', 'scss']);
-gulp.task('default', ['scss', 'browser-sync', 'watch']);
+gulp.task('icons', gulp.series('optimize-images', 'iconfont', 'styles'));
+gulp.task('default', gulp.parallel('styles', 'watch'));
