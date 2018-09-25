@@ -153,4 +153,4 @@ gulp.task('watch', () => {
 });
 
 gulp.task('icons', gulp.series('optimize-images', 'iconfont', 'styles'));
-gulp.task('default', gulp.parallel('styles', 'watch'));
+gulp.task('default', gulp.parallel('styles', 'browser-sync', 'watch'));
