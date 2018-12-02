@@ -47,4 +47,3 @@ rules:
         - 'alphabetical'
       ignore-custom-properties: true
   pseudo-element: false
-
