@@ -23,8 +23,7 @@ TAG SCSS Starter w/ Gulp
 
 ## Grid:
 
-* We have Susy 3 included in this repo. You can customize it as needed. See the documentation at [http://oddbird.net/susy/docs](http://oddbird.net/susy/docs)
-* Unfortunately, Susy doesn't seem to want to play nicely with the sourcemaps, so we've commented them out of the gulpfile for the time being. If you're not using Susy, feel free to uncomment them.
+* __Susy__ removed fbeb55f
 
 ### Generating Icons
 * Add your icons to `images/svg/` and run the `gulp icons` task.
