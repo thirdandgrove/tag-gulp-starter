@@ -100,7 +100,7 @@ gulp.task('iconfont', () => {
 });
 
 gulp.task('eslint', () => {
-  gulp.src(paths.scripts)
+  return gulp.src(paths.scripts)
     .pipe(eslint({
       parser: 'babel-eslint',
       rules: {
