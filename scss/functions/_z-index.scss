@@ -1,0 +1,37 @@
+/**
+ * z-index
+ * Accepts:
+ * - $name: {String} Add name to map in layer of appearance.
+ *
+ * Usage:
+ * $z-indexes: (
+ *   main: (...nesting),
+ *   header: (),
+ *   footer: ()
+ * );
+ *
+ * .thing {
+ *   z-index: z('region', 'block', 'element');
+ * }
+ */
+
+@function z-index($keys) {
+  $map: $z-indexes;
+  $found-index: null;
+
+  @each $key in $keys {
+    @if (type-of($map) == "map") {
+      $found-index: index(map-keys($map), $key);
+      $map: map-get($map, $key);
+    }
+    @else {
+      $found-index: index($map, $key);
+    }
+  }
+
+  @return $found-index;
+}
+
+@function z($keys...) {
+  @return z-index($keys);
+}
