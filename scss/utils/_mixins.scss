@@ -1,56 +1,126 @@
-// Variables for the breakpoints are in the _variables partial
-// Example:
-// .foo {
-//   width: 100%;
-//
-//   @include bp(sm) {
-//     width: 50%;
-//   }
-// }
-@mixin bp($breakpoint) {
-  // Goes to $breakpoints map and gets each $breakpoint value (if it has any)
-  @if map-has-key($breakpoints, $breakpoint) {
+/**
+ * Icon Styles
+ * Variables for the icons are in the _variables partial
+ * This mixin is invoked by the each loop in _icons.scss,
+ * it should not be necessary to use it on its own.
+ */
+@mixin icon-styles($symbol) {
+  @extend %icon;
+  content: $symbol;
+}
 
-    // Create media query based on that $breakpoint value
+/**
+ * Breakpoints
+ * Accepts:
+ * - $breakpoint: {String} Name from varible breakpoint map.
+ *
+ * Usage:
+ * .thing {
+ *   @include bp(md) { display: none }
+ * }
+ */
+@mixin bp($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
     @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
       @content;
     }
-
   }
   @else {
     @warn "Breakpoint doesn't exist please check breakpoints map.";
   }
 }
 
-// Variables for the icons are in the _variables partial
-// This mixin is invoked by the each loop in _icons.scss, it should not be necessary to use it on its own.
-@mixin icon-styles($symbol) {
-  @extend %icon;
-  content: $symbol;
+/**
+ * Gradients
+ * Accepts:
+ * - $start-color: {String} Color variable.
+ * - $end-color {String} Color variable.
+ * - $orientation { String } vertical, horizonal, null.
+ *
+ * Usage:
+ * .thing {
+ *   @include gradient(red, blue, horizontal);
+ * }
+ */
+@mixin gradient($start-color, $end-color, $orientation) {
+  background: $start-color;
+
+  @if $orientation == 'vertical' {
+    background: linear-gradient(to bottom, $start-color, $end-color);
+  }
+  @else if $orientation == 'horizontal' {
+    background: linear-gradient(to right, $start-color, $end-color);
+  }
+  @else if $orientation == 'radial' {
+    background: radial-gradient(ellipse at center, $start-color, $end-color);
+  }
+  @else {
+    @warn "Invalid orientation";
+  }
 }
 
-// Gradients
-@mixin gradient-vert($color1, $color2) {
-  background: linear-gradient(to bottom, $color1 0%, $color2 100%);
-}
-
-@mixin gradient-hor($color1, $color2) {
-  background: linear-gradient(to right, $color1 0%, $color2 100%);
-}
-
-// Active states
+/**
+ * Is active
+ * Helper for native states
+ *
+ * Usage:
+ * .thing {
+ *   @include is-active;
+ * }
+ */
 @mixin is-active {
   &:hover,
   &:active,
-  &:focus,
-  &.active {
+  &:focus {
     @content;
   }
 }
 
-// Placeholder text
+/**
+ * Placeholder text
+ * Styles input placeholders
+ *
+ * Usage:
+ * .thing {
+ *   @include placeholder;
+ * }
+ */
 @mixin placeholder {
   &:-moz-placeholder { @content; }
   &::-moz-placeholder { @content; }
   &::-webkit-input-placeholder { @content; }
+}
+
+/**
+ * State is...
+ * For when state changes are made with js.
+ * Accepts:
+ * - $el: {String} Class added by js.
+ * - $position: {String} Where is lies on the DOM.
+ * - $parent: {String} Parent element (optional).
+ *
+ * Usage:
+ * .thing::before {
+ *   @include state-is('active', 'self');
+ * }
+ */
+@mixin state-is($el, $position: 'self', $parent: '' ) {
+  @if $position == "self" {
+    #{$parent} &#{$el} {
+      @content;
+    }
+  }
+  @else if $position == "child" {
+    #{$parent} & #{$el} {
+      @content;
+    }
+  }
+  @else if $position == "parent" {
+    #{$parent} #{$el} & {
+      @content;
+    }
+  }
+  @else {
+    @warn "Invalid position";
+  }
 }

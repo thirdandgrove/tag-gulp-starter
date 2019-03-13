@@ -1,15 +1,5 @@
-%clearfix {
-  &:before,
-  &:after {
-    content: "";
-    display: table;
-  }
-  &:after {
-    clear: both;
-  }
-}
-
-%visuallyhidden {
+// Visually hide elements
+%visually-hidden {
   position: absolute;
   clip: rect(0 0 0 0);
   width: 1px;
@@ -24,7 +14,7 @@
 %icon {
   font-family: $font-family-icons;
   font-style: normal;
-  font-weight: normal;
+  font-weight: $font-weight-regular;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
@@ -32,54 +22,34 @@
   speak: none;
 }
 
-// Recreating bullets and numbers because we undo them in the reset;
-// This method is preferable to changing the "display" value back because
-// it allows us more granular and cross-browser control over spacing,
-// plus the ability to style the bullets and numbers.
-// Don't use %list dirctly; use %bullets or %numbers (below)
-%list {
-  padding-left: px-to-rem(50);
-  margin-bottom: px-to-rem(20);
+// Remove order/unordered list styling
+%not-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 
   li {
-    position: relative;
-    margin-bottom: px-to-rem(20);
+    padding: 0;
 
-    &:before {
-      margin-left: px-to-rem(-30);
-      position: absolute;
-      // can add a color or something to your numbers/bullets if desired
+    &::before {
+      display: none;
     }
-
-    ul,
-    ol { // less spacing when nested
-      margin-top: px-to-rem(20);
-      padding-left: px-to-rem(35);
-    }
-  } //li
-} //list
-
-// Bullets - apply to a <ul>
-%bullets {
-  @extend %list;
-
-  li:before {
-    content: '\2022'; // bullets
   }
-} //bullets
+}
 
-// Numbers - apply to an <ol>
-%numbers {
-  @extend %list;
-  counter-reset: li;
+// For image replacement
+%ir {
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
 
-  li:before {
-    content: counter(li)')'; // numbers
-    counter-increment: li;
+  br {
+    display: none;
   }
+}
 
-  ul li:before { // don't let uls nested inside ols inherit ol behavior
-    content: '\2022';
-    counter-increment: none;
-  }
-} //numbers
+// Center items with margins
+%center-by-margin {
+  margin-left: auto;
+  margin-right: auto;
+}

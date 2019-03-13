@@ -26,13 +26,12 @@ rules:
     - 2
     -
       exclude:
-        - breakpoint
-        - mq
         - bp
         - placeholder
         - is-active
-
-  no-warn: 1
+        - state-is
+        - gradient
+  no-warn: 0
   no-debug: 1
   no-ids: 2
   no-important: 2
