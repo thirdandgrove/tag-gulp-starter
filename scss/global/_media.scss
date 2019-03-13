@@ -1,13 +1,16 @@
-// We make embedded iframes responsive
+img, iframe, object {
+  max-width: 100%;
+  height: auto;
+}
 
-.movie-wrapper { // or whatever the class may be...
+.video-wrap {
   overflow: hidden;
   position: relative;
   padding-bottom: 56.25%;
   height: 0;
 }
 
-.movie-wrapper iframe {
+.video-wrap iframe {
   position: absolute;
   height: 100%;
   width: 100%;

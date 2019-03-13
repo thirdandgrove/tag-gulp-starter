@@ -1,5 +1,3 @@
-// Global typography defaults. If these need to be overridden in a specific
-// instance, it should be done in a "components" partial
 html {
   // You should ALWAYS have this line, unchanged.
   // The px-to-rem function depends on it.
@@ -7,35 +5,46 @@ html {
 }
 
 body {
-  // Will probably declare fonts, colors, etc. as desired. Examples:
-  // font-family: $font-family-sans;
-  // font-weight: $font-weight-normal;
-  // color: $c-black;
-}
-
-h1 {
 
 }
 
-h2 {
-
-}
-
-h3 {
-
-}
-
-h4 {
-
-}
-
-h5 {
-
-}
-
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
+  margin-top: 0;
+}
+
+h1, %h1 {
 
 }
+
+h2, %h2 {
+
+}
+
+h3, %h3 {
+
+}
+
+h4, %h4 {
+
+}
+
+h5, %h5 {
+
+}
+
+h6, %h6 {
+
+}
+
+p, %p {
+
+}
+
 
 blockquote {
 
@@ -63,7 +72,7 @@ dd {
 
 b,
 strong {
-  // font-weight: $font-weight-bold;
+
 }
 
 i,
@@ -73,20 +82,6 @@ em {
 
 u {
   text-decoration: underline;
-}
-
-p {
-
-}
-
-// Prevents bullet styling applying to menus, etc.
-// Scope selectors as needed
-.main ul {
-  @extend %bullets;
-}
-
-.main ol {
-  @extend %numbers;
 }
 
 sup {
@@ -101,11 +96,6 @@ sub {
   top: 0.2em;
 }
 
-// Undoing the ugly blue glow that defaults when you focus on a link or anything
-// with a tabindex. Put focus state back on links below.
-:focus {
-  outline: none;
-}
 
 a {
 

@@ -1,29 +1,14 @@
-// Button styles.
-
-[role="button"] {
-
-}
-
 // sass-lint:enable-all
 .btn {
-  border: none;
+  // resets
   display: inline-block;
-  max-width: 100%;
-  text-align: center;
-  text-decoration: none;
-  background-image: none;
   white-space: nowrap;
   touch-action: manipulation;
   cursor: pointer;
   user-select: none;
 }
 
-.btn:focus,
-.btn:active:focus,
-.btn.active:focus,
-.btn.focus,
-.btn:active.focus,
-.btn.active.focus {
+.btn:focus {
 
 }
 

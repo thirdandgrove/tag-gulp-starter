@@ -1,11 +1,5 @@
 @import "functions/**/*.scss";
-
 @import "settings/**/*.scss";
-
-// Order matters and icon mixin depends on extends.
-@import "utils/extendables";
-@import "utils/mixins";
-
+@import "utils/**/*.scss";
 @import "global/**/*.scss";
 @import "layout/**/*.scss";
-@import "components/**/*.scss";
