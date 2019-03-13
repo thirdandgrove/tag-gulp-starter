@@ -14,7 +14,7 @@ files:
   include: 'scss/**/*.scss'
   ignore:
     - 'scss/templates/**/*.*'
-    - 'scss/global/_icons.scss'
+    - 'scss/global/__icons.scss'
 # Rule Configuration
 rules:
   extends-before-mixins: 1

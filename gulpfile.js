@@ -82,9 +82,9 @@ gulp.task('iconfont', () => {
   return gulp.src(paths.images.svg)
     .pipe(iconfontCSS({
       fontName: fontName,
-      path: './scss/templates/icons.scss',
-      targetPath: '../scss/global/_icons.scss',
-      fontPath: '../fonts/',
+      path: './scss/templates/_icons-template.scss',
+      targetPath: '../scss/global/__icons.scss',
+      fontPath: '../fonts/icons/',
       cacheBuster: runTimestamp
     }))
     .pipe(iconfont({
@@ -96,7 +96,7 @@ gulp.task('iconfont', () => {
       prependUnicode: true,
       timestamp: runTimestamp,
     }))
-    .pipe(gulp.dest('./fonts/'));
+    .pipe(gulp.dest('./fonts/icons/'));
 });
 
 gulp.task('eslint', () => {
