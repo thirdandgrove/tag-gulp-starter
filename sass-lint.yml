@@ -15,6 +15,7 @@ files:
   ignore:
     - 'scss/templates/**/*.*'
     - 'scss/global/__icons.scss'
+    - 'scss/utils/_modern-normalize.scss'
 # Rule Configuration
 rules:
   extends-before-mixins: 1
