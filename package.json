@@ -9,7 +9,7 @@
     "babel-eslint": "^9.0.0",
     "babel-preset-env": "^1.7.0",
     "beeper": "^1.1.1",
-    "browser-sync": "^2.24.7",
+    "browser-sync": "^2.26.3",
     "gulp": "^4.0.0",
     "gulp-babel": "^7.0.1",
     "gulp-cached": "^1.1.0",
