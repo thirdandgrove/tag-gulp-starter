@@ -11,11 +11,11 @@ options:
   max-warnings: 1
 # File Options
 files:
-  include: 'scss/**/*.scss'
+  include: 'src/scss/**/*.scss'
   ignore:
-    - 'scss/templates/**/*.*'
-    - 'scss/global/__icons.scss'
-    - 'scss/utils/_modern-normalize.scss'
+    - 'src/scss/templates/**/*.*'
+    - 'src/scss/global/__icons.scss'
+    - 'src/scss/utils/_modern-normalize.scss'
 # Rule Configuration
 rules:
   extends-before-mixins: 1
