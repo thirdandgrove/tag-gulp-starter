@@ -3,14 +3,14 @@ img, iframe, object {
   height: auto;
 }
 
-.video-wrap {
+.video__wrap {
   overflow: hidden;
   position: relative;
   padding-bottom: 56.25%;
   height: 0;
 }
 
-.video-wrap iframe {
+.video__wrap iframe {
   position: absolute;
   height: 100%;
   width: 100%;
