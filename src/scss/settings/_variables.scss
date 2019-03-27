@@ -1,23 +1,17 @@
 // Colors variables
 // Color variables should start with 'c-'
-// It may often be helpful to include the RGB values in a comment next to each
-// for ease of interpretation when prototypes use RGB or RGBA
-// Examples:
-$c-black: #000000; // RGB 0 0 0
-$c-white: #ffffff; // RGB 255 255 255
-$c-whatever: #ff0000; // RGB 255, 0, 0
+$c-black: #000000;
+$c-white: #ffffff;
 
 // Font-related variables
 // Font variables should start with 'font-'
-// Replace any/all values as appropriate
-$font-family-serif: 'Georgia', serif;
-$font-family-sans: 'Helvetica', sans-serif;
+$font-family-serif: serif;
+$font-family-sans: sans-serif;
 $font-family-icons: 'icons';
 
-$font-size-base: 16; // The default font size for your site. This gets used in
+// The default font size for your site. This gets used in
 // the px-to-em() function used sitewide.
-$font-weight-normal: 400;
-$font-weight-bold: 700;
+$font-size-base: 16;
 
 // Font weights
 $font-weight-thin: 300;
@@ -37,8 +31,9 @@ $breakpoints: (
 
 // z-index map
 // Used in z() function used sitewide.
+// Remove the examples below when you are ready to layer your own.
 $z-indexes: (
-  top: (),
-  middle: (),
-  bottom: ()
+  example_top: (),
+  example_middle: (),
+  example_bottom: ()
 );
