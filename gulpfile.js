@@ -9,6 +9,7 @@ var babel        = require('gulp-babel'),
     iconfont     = require('gulp-iconfont'),
     iconfontCSS  = require('gulp-iconfont-css'),
     imagemin     = require('gulp-imagemin'),
+    kss          = require('kss'),
     notify       = require('gulp-notify'),
     plumber      = require('gulp-plumber'),
     postcss      = require('gulp-postcss'),
@@ -31,6 +32,10 @@ var paths = {
   styles: {
     src: 'src/scss/**/*.scss',
     dist: 'dist/css'
+  },
+  styleguide: {
+    dist: 'styleguide/',
+    homepage: '../kss/styleguide.md'
   },
   scripts: {
     src: 'src/js/custom/**/*.js',
@@ -158,6 +163,18 @@ gulp.task('browser-sync', () => {
     proxy: {
       target: localDev
     }
+  });
+});
+
+// KSS Styleguides
+gulp.task('kss', function(){
+  return kss({
+    source: 'src/scss/',
+    title: 'Styleguide',
+    builder: 'src/kss/theme',
+    destination: paths.styleguide.dist,
+    homepage: paths.styleguide.homepage,
+    css: '../'+ paths.styles.dist + '/styles.css'
   });
 });
 

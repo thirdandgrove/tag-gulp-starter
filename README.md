@@ -30,5 +30,9 @@ If you need to ignore a rule use: `// sass-lint:disable <rule>, <rule>` and incl
 
 [Docs here](https://github.com/sasstools/sass-lint/tree/develop/docs)
 
+### KSS Styleguides
+There is an option to build visual stylguides with KSS. If unfamiliar with the syntax see the docs.
+[Docs here](https://github.com/kss-node/kss-node)
+
 ## Helpful References:
 * [SCSS basics](http://sass-lang.com/guide) and [full SCSS documentation](http://sass-lang.com/documentation/file.SASS_REFERENCE.html)
