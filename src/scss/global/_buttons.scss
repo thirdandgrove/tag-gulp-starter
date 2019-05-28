@@ -1,0 +1,29 @@
+// Buttons
+//
+// Markup: <a class="btn" href="#">Button</a>
+//
+// Style guide: Global.Buttons
+
+
+// sass-lint:enable-all
+.btn {
+  // resets
+  display: inline-block;
+  white-space: nowrap;
+  touch-action: manipulation;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn:focus {
+
+}
+
+.btn:hover,
+.btn:focus {
+
+}
+
+.btn:active {
+
+}

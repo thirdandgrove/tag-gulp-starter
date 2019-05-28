@@ -1,0 +1,55 @@
+// Visually hide elements
+%visually-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  overflow: hidden;
+}
+
+// Use the mixin for this; this is for the mixin to call ONLY
+%icon {
+  font-family: $font-family-icons;
+  font-style: normal;
+  font-weight: $font-weight-regular;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  speak: none;
+}
+
+// Remove order/unordered list styling
+%not-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 0;
+
+    &::before {
+      display: none;
+    }
+  }
+}
+
+// For image replacement
+%ir {
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+
+  br {
+    display: none;
+  }
+}
+
+// Center items with margins
+%center-by-margin {
+  margin-left: auto;
+  margin-right: auto;
+}

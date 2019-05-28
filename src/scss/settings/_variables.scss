@@ -1,0 +1,39 @@
+// Colors variables
+// Color variables should start with 'c-'
+$c-black: #000000;
+$c-white: #ffffff;
+
+// Font-related variables
+// Font variables should start with 'font-'
+$font-family-serif: serif;
+$font-family-sans: sans-serif;
+$font-family-icons: 'icons';
+
+// The default font size for your site. This gets used in
+// the px-to-em() function used sitewide.
+$font-size-base: 16;
+
+// Font weights
+$font-weight-thin: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 600;
+$font-weight-black: 700;
+$font-weight-xblack: 900;
+
+// Breakpoint variables
+// Used in bp mixin in _mixins.scss
+$breakpoints: (
+  sm: px-to-rem(480),
+  md: px-to-rem(768),
+  lg: px-to-rem(960)
+);
+
+// z-index map
+// Used in z() function used sitewide.
+// Remove the examples below when you are ready to layer your own.
+$z-indexes: (
+  example_top: (),
+  example_middle: (),
+  example_bottom: ()
+);

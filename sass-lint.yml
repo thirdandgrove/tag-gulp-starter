@@ -1,45 +1,44 @@
-#########################
-## Sample Sass Lint File
-#########################
 # Linter Options
 options:
-  # Don't merge default rules
   merge-default-rules: false
-  # Set the formatter to 'stylish'
   formatter: stylish
-  # Raise an error if more than 50 warnings are generated
   max-warnings: 1
-# File Options
 files:
-  include: 'scss/**/*.scss'
+  include: 'src/scss/**/*.scss'
   ignore:
-    - 'scss/templates/**/*.*'
-    - 'scss/global/_icons.scss'
-# Rule Configuration
+    - 'src/scss/templates/**/*.*'
+    - 'src/scss/global/__icons.scss'
+    - 'src/scss/utils/_modern-normalize.scss'
 rules:
-  extends-before-mixins: 1
+  empty-line-between-blocks:
+  - 2
+  -
+    include: true
+    allow-single-line-blocks: false
   extends-before-declarations: 1
-  placeholder-in-extend: 2
-  one-declaration-per-line: 1
-  url-quotes: 1
-  mixins-before-declarations:
-    - 2
-    -
-      exclude:
-        - breakpoint
-        - mq
-        - bp
-        - placeholder
-        - is-active
-
-  no-warn: 1
-  no-debug: 1
-  no-ids: 2
-  no-important: 2
+  extends-before-mixins: 1
+  final-newline: 2
   indentation:
     - 2
     -
       size: 2
+  mixins-before-declarations:
+    - 2
+    -
+      exclude:
+        - bp
+        - placeholder
+        - is-active
+        - state-is
+        - gradient
+  nesting-depth: 1
+  no-color-literals: 1
+  no-debug: 1
+  no-ids: 2
+  no-important: 2
+  no-warn: 1
+  one-declaration-per-line: 1
+  placeholder-in-extend: 2
   property-sort-order:
     - 1
     -
@@ -47,3 +46,7 @@ rules:
         - 'alphabetical'
       ignore-custom-properties: true
   pseudo-element: false
+  space-before-brace: 2
+  space-after-colon: 1
+  url-quotes: 1
+  zero-unit: 1

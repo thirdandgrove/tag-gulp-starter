@@ -1,0 +1,26 @@
+// Media
+//
+// Markup:
+// <div class="video__wrap">
+//   <iframe src="https://player.vimeo.com/video/8733915" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+// </div>
+//
+// Style guide: Global.Media
+
+img, iframe, object {
+  max-width: 100%;
+  height: auto;
+}
+
+.video__wrap {
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+}
+
+.video__wrap iframe {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
