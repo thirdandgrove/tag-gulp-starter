@@ -29,5 +29,8 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-terser": "^1.1.7",
     "kss": "^3.0.0-beta.25"
-  }
+  },
+  "browserslist": [
+    "last 3 versions"
+  ]
 }
