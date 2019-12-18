@@ -6,11 +6,13 @@ var babel        = require('gulp-babel'),
     cssnano      = require('gulp-cssnano'),
     eslint       = require('gulp-eslint'),
     gulp         = require('gulp'),
+    gcmq         = require('gulp-group-css-media-queries'),
     iconfont     = require('gulp-iconfont'),
     iconfontCSS  = require('gulp-iconfont-css'),
     imagemin     = require('gulp-imagemin'),
     kss          = require('kss'),
     notify       = require('gulp-notify'),
+    criticalCss  = require('gulp-penthouse'),
     plumber      = require('gulp-plumber'),
     postcss      = require('gulp-postcss'),
     prefix       = require('autoprefixer'),
@@ -26,11 +28,15 @@ var babel        = require('gulp-babel'),
 var fontName = 'icons';
 
 // Paths
-var localDev = 'http://local.yourlocal.com';
+var env = {
+  local: 'http://local.yourlocal.com',
+  prod: 'http://your.production.com'
+}
 
 var paths = {
   styles: {
     src: 'src/scss/**/*.scss',
+    critical: '/css/critical.css',
     dist: 'dist/css'
   },
   styleguide: {
@@ -66,6 +72,7 @@ gulp.task('scss', () => {
     .pipe(sourcemaps.init())
     .pipe(sassGlob())
     .pipe(sass({outputStyle: 'compressed'}))
+    .pipe(gcmq())
     .pipe(cssnano({zindex: false}))
     .pipe(postcss([prefix({cascade: false})]))
     .pipe(sourcemaps.write('maps'))
@@ -152,13 +159,37 @@ gulp.task('scripts', () => {
       .pipe(reload({stream:true}));
 });
 
+// Critical CSS
+gulp.task('critical-css', function () {
+  return gulp.src(paths.styles.dist + '/styles.css')
+    .pipe(criticalCss({
+      out: paths.styles.critical,
+      url: env.prod,
+      width: 1400,
+      height: 900,
+      strict: true,
+      userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+      phantomJsOptions: {
+        'ssl-protocol': 'any',
+      }
+    }))
+    .pipe(cssnano({
+      safe: true
+    }))
+    .pipe(gulp.dest('./dist/'));
+});
+
 // Browser Sync
 gulp.task('browser-sync', () => {
   browserSync({
     notify: false,
+    open: 'local',
     proxy: {
-      target: localDev
-    }
+      target: env.local,
+      ws: true
+    },
+    ghostMode: true,
+    https: false
   });
 });
 
@@ -184,3 +215,4 @@ gulp.task('watch', () => {
 
 gulp.task('icons', gulp.series('optimize-images', 'iconfont', 'styles'));
 gulp.task('default', gulp.parallel('styles', 'browser-sync', 'watch'));
+gulp.task('build', gulp.series('styles', 'scripts', 'kss', 'critical-css'));
