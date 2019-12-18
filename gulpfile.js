@@ -67,11 +67,7 @@ gulp.task('scss', () => {
     .pipe(sassGlob())
     .pipe(sass({outputStyle: 'compressed'}))
     .pipe(cssnano({zindex: false}))
-    .pipe(postcss([
-      prefix({
-        browsers: ['last 3 versions'],
-        cascade: false })
-      ]))
+    .pipe(postcss([prefix({cascade: false})]))
     .pipe(sourcemaps.write('maps'))
     .pipe(gulp.dest(paths.styles.dist))
     .pipe(reload({stream:true}));
