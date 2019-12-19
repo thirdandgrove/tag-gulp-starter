@@ -160,7 +160,7 @@ gulp.task('scripts', () => {
 });
 
 // Critical CSS
-gulp.task('critical-css', function () {
+gulp.task('critical-css', () => {
   return gulp.src(paths.styles.dist + '/styles.css')
     .pipe(criticalCss({
       out: paths.styles.critical,
@@ -194,7 +194,7 @@ gulp.task('browser-sync', () => {
 });
 
 // KSS Styleguides
-gulp.task('kss', function(){
+gulp.task('kss', () => {
   return kss({
     source: 'src/scss/',
     title: 'Styleguide',
@@ -203,6 +203,11 @@ gulp.task('kss', function(){
     homepage: paths.styleguide.homepage,
     css: '../'+ paths.styles.dist + '/styles.css'
   });
+});
+
+// Clear cache
+gulp.task('clear', () => {
+  cache.clearAll();
 });
 
 gulp.task('styles', gulp.series('scss', 'scsslint'));
