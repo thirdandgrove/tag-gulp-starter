@@ -5,7 +5,7 @@
 1. If they aren't already, make sure that node and npm (Node Package Manager) are [installed](http://blog.nodeknockout.com/post/65463770933/how-to-install-node-js-and-npm). If you are using a Mac, Homebrew is recommended for this.
 2. If this is your first time ever using gulp, you will need to install it globally by running `npm install -g gulp` so that the terminal recognizes gulp commands.
 3. The first time running this particular project, `cd` into this directory and type `npm install`.
-4. You'll also need to change the `localDev` variable in gulpfile.js to point to your local site URL.
+4. You'll also need to change the environment variables in gulpfile.js to point to your site URLs.
 5. To continually watch .scss and .js files for changes, type `gulp` and use `ctrl + C` to stop.
 6. To run a one-time compilation of .scss files, use `gulp scss`. To generate KSS styleguides use `gulp kss`.
 
