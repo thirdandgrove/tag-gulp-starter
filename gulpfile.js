@@ -16,6 +16,7 @@ var babel        = require('gulp-babel'),
     plumber      = require('gulp-plumber'),
     postcss      = require('gulp-postcss'),
     prefix       = require('autoprefixer'),
+    pxtorem      = require('postcss-pxtorem'),
     sass         = require('gulp-sass'),
     sassGlob     = require('gulp-sass-glob'),
     scsslint     = require('gulp-sass-lint'),
@@ -74,7 +75,13 @@ gulp.task('scss', () => {
     .pipe(sass({outputStyle: 'compressed'}))
     .pipe(gcmq())
     .pipe(cssnano({zindex: false}))
-    .pipe(postcss([prefix({cascade: false})]))
+    .pipe(postcss([
+      prefix({ cascade: false }),
+      pxtorem({
+        rootValue: 16,
+        unitPrecision: 5,
+        'propList': ['*',]
+      })]))
     .pipe(sourcemaps.write('maps'))
     .pipe(gulp.dest(paths.styles.dist))
     .pipe(reload({stream:true}));
