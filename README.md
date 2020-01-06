@@ -26,6 +26,7 @@
 - Tip: If your icons seem tiny or invisible despite normal font sizes, make sure that none of the svg files have `width="100%"` and/or `height="100%"` on the `<svg>` tag.
 - Tip: You should optimize your SVG files using a tool like [ImageOptim](https://imageoptim.com/mac).
 - Tip: Often icons can seems too thin or too thick. Make sure to expand and combine paths in a vector editing software.
+* Tip: If running `gulp icons` returns an error, sometimes this can be caused by a malformed svg. Try converting the shape to outlines, expand to bounds, then clip to artboard.
 
 ### Sass-lint
 
