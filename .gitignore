@@ -1,3 +1,5 @@
 .sass-cache*
 node_modules*
 package-lock.json
+.DS_Store
+styleguide*

@@ -9,10 +9,6 @@ $font-family-serif: serif;
 $font-family-sans: sans-serif;
 $font-family-icons: 'icons';
 
-// The default font size for your site. This gets used in
-// the px-to-em() function used sitewide.
-$font-size-base: 16;
-
 // Font weights
 $font-weight-thin: 300;
 $font-weight-regular: 400;
@@ -24,9 +20,9 @@ $font-weight-xblack: 900;
 // Breakpoint variables
 // Used in bp mixin in _mixins.scss
 $breakpoints: (
-  sm: px-to-rem(480),
-  md: px-to-rem(768),
-  lg: px-to-rem(960)
+  sm: 480px,
+  md: 768px,
+  lg: 960px
 );
 
 // z-index map

@@ -28,23 +28,23 @@
 // Don't use %list dirctly; use %bullets or %numbers (below)
 .list,
 %list {
-  padding-left: px-to-rem(20);
-  margin-bottom: px-to-rem(20);
+  padding-left: 20px;
+  margin-bottom: 20px;
   list-style: none;
 
   li {
     position: relative;
-    margin-bottom: px-to-rem(20);
+    margin-bottom: 20px;
 
     &::before {
       position: absolute;
-      margin-left: px-to-rem(-20);
+      margin-left: -20px);
     }
 
     ul,
     ol {
-      margin-top: px-to-rem(20);
-      padding-left: px-to-rem(35);
+      margin-top: 20px;
+      padding-left: 35px;
     }
   }
 }
