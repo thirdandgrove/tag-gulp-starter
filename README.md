@@ -11,7 +11,6 @@
 
 ## Guidelines:
 
-- In general, all units should use the `px-to-rem()` described in `/functions/_px-to-rem.scss`
 - With rare case-by-case exceptions, bitmap sprites should never be used.
 - For multi-color illustrations for which a bitmap sprite might often be used, use an SVG sprite instead if at all possible.
 - Do not nest your CSS selectors, except for states `(:hover, etc.)`, pseudoelements `(::before, ::after)`, or pseudo-selectors `(:nth-child)`, etc. While SCSS provides this functionality, it can easily get out of control creating hard-to-read code and unwieldy selectors.
