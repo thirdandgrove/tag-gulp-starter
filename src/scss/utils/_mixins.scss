@@ -124,3 +124,20 @@
     @warn "Invalid position";
   }
 }
+
+/**
+ * Flex width
+ * Helper shorthand for flexbox with cross-browser gotchas
+ * Assumes flex-grow and flex-shrink of 0; if you need non-zero values for
+ * those, this mixin is not for you.
+ *
+ * Usage:
+ * .thing {
+ *   @include flex-width(50%);
+ * }
+ */
+@mixin flex-width($width) {
+  flex: 0 0 #{$width};
+  width: #{$width};
+  max-width: #{$width};
+}
