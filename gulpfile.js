@@ -25,15 +25,13 @@ var babel        = require('gulp-babel'),
     reload       = browserSync.reload,
     runTimestamp = Math.round(Date.now() / 1000);
 
+// Environments
+var env = require('./.env');
+
 // Prefix with project code
 var fontName = 'icons';
 
 // Paths
-var env = {
-  local: 'http://local.yourlocal.com',
-  prod: 'http://your.production.com'
-}
-
 var paths = {
   styles: {
     src: 'src/scss/**/*.scss',
