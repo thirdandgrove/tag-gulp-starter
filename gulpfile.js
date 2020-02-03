@@ -6,7 +6,6 @@ var babel        = require('gulp-babel'),
     cssnano      = require('gulp-cssnano'),
     eslint       = require('gulp-eslint'),
     gulp         = require('gulp'),
-    gcmq         = require('gulp-group-css-media-queries'),
     iconfont     = require('gulp-iconfont'),
     iconfontCSS  = require('gulp-iconfont-css'),
     imagemin     = require('gulp-imagemin'),
@@ -15,6 +14,7 @@ var babel        = require('gulp-babel'),
     criticalCss  = require('gulp-penthouse'),
     plumber      = require('gulp-plumber'),
     postcss      = require('gulp-postcss'),
+    postcssMediaQuery = require('postcss-combine-media-query'),
     prefix       = require('autoprefixer'),
     pxtorem      = require('postcss-pxtorem'),
     sass         = require('gulp-sass'),
@@ -71,10 +71,10 @@ gulp.task('scss', () => {
     .pipe(sourcemaps.init())
     .pipe(sassGlob())
     .pipe(sass({outputStyle: 'compressed'}))
-    .pipe(gcmq())
     .pipe(cssnano({zindex: false}))
     .pipe(postcss([
       prefix({ cascade: false }),
+      postcssMediaQuery(),
       pxtorem({
         rootValue: 16,
         unitPrecision: 5,
