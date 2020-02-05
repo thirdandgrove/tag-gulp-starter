@@ -16,6 +16,7 @@
 - Do not nest your CSS selectors, except for states `(:hover, etc.)`, pseudoelements `(::before, ::after)`, or pseudo-selectors `(:nth-child)`, etc. While SCSS provides this functionality, it can easily get out of control creating hard-to-read code and unwieldy selectors.
 - All styling should be done mobile-first. This repo contains a mixin for the `min-width` media query only, which in the vast majority of cases should be all you need.
 - When in doubt, break your code out into its own partial in appropriately named folders.
+- Note that previous implementations of the `px-to-rem()` function have been replaced by a PostCSS plugin that automatically converts px to rem. Saves us all keystrokes!
 - [View the full TAG Front-End Best Practices](https://thirdandgrove.atlassian.net/wiki/display/TAGCo/Front+End+Best+Practices)
 
 ### Generating Icons
@@ -25,6 +26,7 @@
 - Tip: If your icons seem tiny or invisible despite normal font sizes, make sure that none of the svg files have `width="100%"` and/or `height="100%"` on the `<svg>` tag.
 - Tip: You should optimize your SVG files using a tool like [ImageOptim](https://imageoptim.com/mac).
 - Tip: Often icons can seems too thin or too thick. Make sure to expand and combine paths in a vector editing software.
+
 * Tip: If running `gulp icons` returns an error, sometimes this can be caused by a malformed svg. Try converting the shape to outlines, expand to bounds, then clip to artboard.
 
 ### Sass-lint
@@ -44,6 +46,10 @@ There is an option to build visual stylguides with KSS. If unfamiliar with the s
 ### Critical CSS
 
 Great for site speed. When modifying global style rebuild the critical css styles. Run `gulp critical-css` will get you there. The penthouse docs are a little light. You can output to .css, .php, .what-have-you.
+
+### PostCSS Combine Media Queries
+
+This plugin moves all media queries to end of the file, so it may introduce bugs if your CSS is not well structured. Please keep this in mind!
 
 ### Build
 
