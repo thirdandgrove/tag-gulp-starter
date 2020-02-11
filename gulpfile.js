@@ -78,6 +78,7 @@ gulp.task('scss', () => {
       pxtorem({
         rootValue: 16,
         unitPrecision: 5,
+        mediaQuery: true,
         'propList': ['*',]
       })]))
     .pipe(sourcemaps.write('maps'))
