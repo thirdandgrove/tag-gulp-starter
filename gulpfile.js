@@ -84,8 +84,8 @@ gulp.task('scss', () => {
         pxtorem({
           rootValue: 16,
           unitPrecision: 5,
-          propList: ['*'],
           mediaQuery: true,
+          propList: ['*'],
         }),
       ])
     )
