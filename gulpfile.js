@@ -80,13 +80,13 @@ gulp.task('scss', () => {
     .pipe(
       postcss([
         prefix({ cascade: false }),
+        postcssMediaQuery(),
         pxtorem({
           rootValue: 16,
           unitPrecision: 5,
           propList: ['*'],
           mediaQuery: true,
         }),
-        postcssMediaQuery(),
       ])
     )
     .pipe(sourcemaps.write('maps'))
