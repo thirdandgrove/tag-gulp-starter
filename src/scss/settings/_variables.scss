@@ -22,14 +22,14 @@ $font-weight-xblack: 900;
 $breakpoints: (
   sm: 480px,
   md: 768px,
-  lg: 960px
+  lg: 960px,
 );
 
 // z-index map
 // Used in z() function used sitewide.
 // Remove the examples below when you are ready to layer your own.
-$z-indexes: (
+$z-layers: (
   example_top: (),
   example_middle: (),
-  example_bottom: ()
+  example_bottom: (),
 );
