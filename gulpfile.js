@@ -20,6 +20,7 @@ var babel = require('gulp-babel'),
   sass = require('gulp-sass'),
   sassGlob = require('gulp-sass-glob'),
   scsslint = require('gulp-sass-lint'),
+  svgSprite = require("gulp-svg-sprites"),
   sourcemaps = require('gulp-sourcemaps'),
   terser = require('gulp-terser'),
   reload = browserSync.reload,
@@ -50,6 +51,11 @@ var paths = {
     src: 'src/images/**/*',
     dist: 'dist/images',
     icons: 'dist/images/icons/*.svg',
+  },
+  svg: {
+    src: 'src/images/**/*.svg',
+    srcOptimized: 'dist/images/svg/',
+    dist: 'dist',
   },
   icons: {
     path: 'src/scss/templates/_icons-template.scss',
@@ -110,7 +116,7 @@ gulp.task('scsslint', () => {
 
 gulp.task('optimize-images', () => {
   return gulp
-    .src(paths.images.src)
+    .src([paths.images.src, '!' + paths.svg.src]) // dont optimize svg sprite images
     .pipe(
       imagemin(
         imagemin.svgo({
@@ -122,6 +128,22 @@ gulp.task('optimize-images', () => {
       )
     )
     .pipe(gulp.dest(paths.images.dist));
+});
+
+gulp.task('optimize-svg', () => {
+  return gulp
+    .src([paths.svg.src, '!src/images/icons/**/*']) // dont optimize icon font svg
+    .pipe(
+      imagemin(
+        imagemin.svgo({
+          plugins: [
+            { convertPathData: { noSpaceAfterFlags: false } },
+            { mergePaths: { noSpaceAfterFlags: false } },
+          ],
+        })
+      )
+    )
+    .pipe(gulp.dest(paths.svg.srcOptimized));
 });
 
 gulp.task('iconfont', () => {
@@ -148,6 +170,18 @@ gulp.task('iconfont', () => {
       })
     )
     .pipe(gulp.dest(paths.icons.dist));
+});
+
+gulp.task('svgSprite', () => {
+  return gulp
+    .src(paths.svg.srcOptimized + '*.svg')
+    .pipe(svgSprite({
+      mode: "symbols",
+      preview: {
+        symbols: "svg/index.html"
+      }
+    }))
+    .pipe(gulp.dest(paths.svg.dist));
 });
 
 gulp.task('eslint', () => {
@@ -261,8 +295,11 @@ gulp.task('watch', () => {
   gulp
     .watch(paths.images.src, gulp.series('optimize-images'))
     .on('change', reload);
+  gulp
+    .watch(paths.svg.src, gulp.series('optimize-svg', 'svgSprite'))
+    .on('change', reload);
 });
 
-gulp.task('icons', gulp.series('optimize-images', 'iconfont', 'styles'));
+gulp.task('icons', gulp.series('optimize-images', 'optimize-svg', 'iconfont', 'styles'));
 gulp.task('default', gulp.parallel('styles', 'browser-sync', 'watch'));
-gulp.task('build', gulp.series('styles', 'scripts', 'kss', 'critical-css'));
+gulp.task('build', gulp.series('styles', 'scripts', 'icons', 'kss', 'critical-css', 'svgSprite'));
