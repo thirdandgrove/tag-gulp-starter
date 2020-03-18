@@ -29,6 +29,14 @@
 
 * Tip: If running `gulp icons` returns an error, sometimes this can be caused by a malformed svg. Try converting the shape to outlines, expand to bounds, then clip to artboard.
 
+### Generating SVG Sprites
+
+- Add svg images to the `src/images` folder. During `gulp watch` these images will be optimized and then sprited. The results will include a unified svg with an unified svg file with appropriate `symbol` for `use` with inline svg. A handy reference HTML sticker sheet is also created in the `dist` directory.
+
+### Using SVG Sprites
+
+- A nice tutorial to use the spite can be found here [SVG symbol a Good Choice for Icons](https://css-tricks.com/svg-symbol-good-choice-icons/)
+
 ### Sass-lint
 
 Sass-lint rules are found in `sass-lint.yml` in the theme root.
