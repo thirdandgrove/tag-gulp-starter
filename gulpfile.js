@@ -82,7 +82,7 @@ gulp.task('scss', () => {
     .pipe(sourcemaps.init())
     .pipe(sassGlob())
     .pipe(sass({ outputStyle: 'compressed' }))
-    .pipe(cssnano({ zindex: false }))
+    .pipe(cssnano({ zindex: false, discardUnused: false }))
     .pipe(
       postcss([
         prefix({ cascade: false }),
