@@ -2,6 +2,7 @@ var babel = require('gulp-babel'),
   beeper = require('beeper'),
   browserSync = require('browser-sync'),
   cache = require('gulp-cache'),
+  clean = require('gulp-clean'),
   concat = require('gulp-concat'),
   cssnano = require('gulp-cssnano'),
   eslint = require('gulp-eslint'),
@@ -50,7 +51,12 @@ var paths = {
   images: {
     src: 'src/images/**/*',
     dist: 'dist/images',
-    icons: 'dist/images/icons/*.svg',
+  },
+  font: {
+    src: 'src/images/font-icons/**/*.svg',
+    srcOptimized: '_temp/',
+    path: '../fonts/icons/',
+    dist: 'dist/fonts/icons/',
   },
   svg: {
     src: 'src/images/**/*.svg',
@@ -60,8 +66,6 @@ var paths = {
   icons: {
     path: 'src/scss/templates/_icons-template.scss',
     target: '../../../src/scss/global/__icons.scss',
-    fontPath: '../fonts/icons/',
-    dist: 'dist/fonts/icons/',
   },
 };
 
@@ -130,9 +134,25 @@ gulp.task('optimize-images', () => {
     .pipe(gulp.dest(paths.images.dist));
 });
 
+gulp.task('optimize-svg-font', () => {
+  return gulp
+    .src(paths.font.src)
+    .pipe(
+      imagemin(
+        imagemin.svgo({
+          plugins: [
+            { convertPathData: { noSpaceAfterFlags: false } },
+            { mergePaths: { noSpaceAfterFlags: false } },
+          ],
+        })
+      )
+    )
+    .pipe(gulp.dest(paths.font.srcOptimized));
+});
+
 gulp.task('optimize-svg', () => {
   return gulp
-    .src([paths.svg.src, '!src/images/icons/**/*']) // dont optimize icon font svg
+    .src([paths.svg.src, '!' + paths.font.src]) // dont optimize icon font svg
     .pipe(
       imagemin(
         imagemin.svgo({
@@ -148,13 +168,13 @@ gulp.task('optimize-svg', () => {
 
 gulp.task('iconfont', () => {
   return gulp
-    .src(paths.images.icons)
+    .src(paths.font.srcOptimized + '*.svg')
     .pipe(
       iconfontCSS({
         fontName: fontName,
         path: paths.icons.path,
         targetPath: paths.icons.target,
-        fontPath: paths.icons.fontPath,
+        fontPath: paths.font.path,
         cacheBuster: runTimestamp,
       })
     )
@@ -169,7 +189,12 @@ gulp.task('iconfont', () => {
         timestamp: runTimestamp,
       })
     )
-    .pipe(gulp.dest(paths.icons.dist));
+    .pipe(gulp.dest(paths.font.dist));
+});
+
+gulp.task('iconfont-clean', function () {
+  return gulp.src(paths.font.srcOptimized, { read: false })
+    .pipe(clean());
 });
 
 gulp.task('svgSprite', () => {
@@ -300,6 +325,6 @@ gulp.task('watch', () => {
     .on('change', reload);
 });
 
-gulp.task('icons', gulp.series('optimize-images', 'optimize-svg', 'iconfont', 'styles'));
+gulp.task('icons', gulp.series('optimize-images', 'optimize-svg-font', 'optimize-svg', 'iconfont', 'iconfont-clean', 'styles'));
 gulp.task('default', gulp.parallel('styles', 'browser-sync', 'watch'));
 gulp.task('build', gulp.series('styles', 'scripts', 'icons', 'kss', 'critical-css', 'svgSprite'));

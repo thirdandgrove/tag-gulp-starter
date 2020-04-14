@@ -21,7 +21,7 @@
 
 ### Generating Icons
 
-- Add your icons to `src/images/icons/` and run the `gulp icons` task.
+- Add your icons to `src/images/font-icons/` and run the `gulp icons` task.
   This will optimize your SVGs and create an icon font with scss partial.
 - Tip: If your icons seem tiny or invisible despite normal font sizes, make sure that none of the svg files have `width="100%"` and/or `height="100%"` on the `<svg>` tag.
 - Tip: You should optimize your SVG files using a tool like [ImageOptim](https://imageoptim.com/mac).
