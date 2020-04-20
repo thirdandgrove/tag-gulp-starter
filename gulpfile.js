@@ -193,7 +193,7 @@ gulp.task('iconfont', () => {
 });
 
 gulp.task('iconfont-clean', function () {
-  return gulp.src(paths.font.srcOptimized, { read: false })
+  return gulp.src(paths.font.srcOptimized, { read: false, allowEmpty: true })
     .pipe(clean());
 });
 
