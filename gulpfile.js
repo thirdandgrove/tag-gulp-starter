@@ -159,6 +159,7 @@ gulp.task('optimize-svg', () => {
           plugins: [
             { convertPathData: { noSpaceAfterFlags: false } },
             { mergePaths: { noSpaceAfterFlags: false } },
+            { removeViewBox: false }
           ],
         })
       )
