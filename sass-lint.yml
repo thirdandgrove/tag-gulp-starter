@@ -11,28 +11,27 @@ files:
     - 'src/scss/utils/_modern-normalize.scss'
 rules:
   empty-line-between-blocks:
-  - 2
-  -
-    include: true
-    allow-single-line-blocks: false
+    - 2
+    - include: true
+      allow-single-line-blocks: false
   extends-before-declarations: 1
   extends-before-mixins: 1
   final-newline: 2
   indentation:
     - 2
-    -
-      size: 2
+    - size: 2
   mixins-before-declarations:
     - 2
-    -
-      exclude:
+    - exclude:
         - bp
         - placeholder
         - is-active
         - state-is
         - gradient
   nesting-depth: 1
-  no-color-literals: 1
+  no-color-literals:
+    - 1
+    - allow-rgba: true
   no-debug: 1
   no-ids: 2
   no-important: 2
