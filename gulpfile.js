@@ -21,7 +21,7 @@ var babel = require('gulp-babel'),
   sass = require('gulp-sass'),
   sassGlob = require('gulp-sass-glob'),
   scsslint = require('gulp-sass-lint'),
-  svgSprite = require("gulp-svg-sprites"),
+  svgSprite = require('gulp-svg-sprites'),
   sourcemaps = require('gulp-sourcemaps'),
   terser = require('gulp-terser'),
   reload = browserSync.reload,
@@ -74,7 +74,7 @@ gulp.task('scss', () => {
     .src('./src/scss/styles.scss')
     .pipe(
       plumber({
-        errorHandler: function(err) {
+        errorHandler: function (err) {
           notify.onError({
             title: 'Gulp error in ' + err.plugin,
             message: err.toString(),
@@ -86,7 +86,7 @@ gulp.task('scss', () => {
     .pipe(sourcemaps.init())
     .pipe(sassGlob())
     .pipe(sass({ outputStyle: 'compressed' }))
-    .pipe(cssnano({ zindex: false, discardUnused: false }))
+    .pipe(cssnano({ zindex: false, discardUnused: false, autoprefixer: false }))
     .pipe(
       postcss([
         prefix({ cascade: false }),
@@ -159,7 +159,7 @@ gulp.task('optimize-svg', () => {
           plugins: [
             { convertPathData: { noSpaceAfterFlags: false } },
             { mergePaths: { noSpaceAfterFlags: false } },
-            { removeViewBox: false }
+            { removeViewBox: false },
           ],
         })
       )
@@ -194,19 +194,22 @@ gulp.task('iconfont', () => {
 });
 
 gulp.task('iconfont-clean', function () {
-  return gulp.src(paths.font.srcOptimized, { read: false, allowEmpty: true })
+  return gulp
+    .src(paths.font.srcOptimized, { read: false, allowEmpty: true })
     .pipe(clean());
 });
 
 gulp.task('svgSprite', () => {
   return gulp
     .src(paths.svg.srcOptimized + '*.svg')
-    .pipe(svgSprite({
-      mode: "symbols",
-      preview: {
-        symbols: "svg/index.html"
-      }
-    }))
+    .pipe(
+      svgSprite({
+        mode: 'symbols',
+        preview: {
+          symbols: 'svg/index.html',
+        },
+      })
+    )
     .pipe(gulp.dest(paths.svg.dist));
 });
 
@@ -231,7 +234,7 @@ gulp.task('scripts', () => {
     .src(paths.scripts.src)
     .pipe(
       plumber({
-        errorHandler: function(err) {
+        errorHandler: function (err) {
           notify.onError({
             title: 'Gulp error in ' + err.plugin,
             message: err.toString(),
@@ -326,6 +329,19 @@ gulp.task('watch', () => {
     .on('change', reload);
 });
 
-gulp.task('icons', gulp.series('optimize-images', 'optimize-svg-font', 'optimize-svg', 'iconfont', 'iconfont-clean', 'styles'));
+gulp.task(
+  'icons',
+  gulp.series(
+    'optimize-images',
+    'optimize-svg-font',
+    'optimize-svg',
+    'iconfont',
+    'iconfont-clean',
+    'styles'
+  )
+);
 gulp.task('default', gulp.parallel('styles', 'browser-sync', 'watch'));
-gulp.task('build', gulp.series('styles', 'scripts', 'icons', 'kss', 'critical-css', 'svgSprite'));
+gulp.task(
+  'build',
+  gulp.series('styles', 'scripts', 'icons', 'kss', 'critical-css', 'svgSprite')
+);
