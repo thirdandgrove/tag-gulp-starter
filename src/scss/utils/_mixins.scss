@@ -124,3 +124,22 @@
     @warn "Invalid position";
   }
 }
+
+/**
+ * Flex
+ * Helper shorthand for flexbox with cross-browser gotchas
+ * Assumes flex-grow and flex-shrink of 0; if you need non-zero values for
+ * those, this mixin is not for you.
+ * Defaults to assuming width for horizontal flexbox layouts, but second arg
+ * can be set to height for vertical layouts
+ *
+ * Usage:
+ * .thing {
+ *   @include flex(50%, height);
+ * }
+ */
+@mixin flex($number, $direction: width) {
+  flex: 0 0 #{$number};
+  #{$direction}: #{$number};
+  max-#{$direction}: #{$number};
+}
