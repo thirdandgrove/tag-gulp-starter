@@ -53,3 +53,19 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+// Reset button styles
+%reset-button {
+  width: auto;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
