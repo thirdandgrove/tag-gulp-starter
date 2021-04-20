@@ -298,7 +298,15 @@ gulp.task('kss', () => {
     builder: 'src/kss/theme',
     destination: paths.styleguide.dist,
     homepage: paths.styleguide.homepage,
-    css: '../' + paths.styles.dist + '/styles.css',
+    css: [
+      '../' + paths.styles.dist + '/styles.css',
+      '../' + paths.styles.dist + '/kss.css',
+    ],
+    js: [
+      '/core/misc/drupal.js',
+      '/core/misc/drupal.init.js',
+      '../' + paths.scripts.dist + '/app.js',
+    ],
   });
 });
 
