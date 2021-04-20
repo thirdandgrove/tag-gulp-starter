@@ -6,13 +6,14 @@ var babel = require('gulp-babel'),
   concat = require('gulp-concat'),
   cssnano = require('gulp-cssnano'),
   eslint = require('gulp-eslint'),
+  fs = require('fs'),
   gulp = require('gulp'),
   iconfont = require('gulp-iconfont'),
   iconfontCSS = require('gulp-iconfont-css'),
   imagemin = require('gulp-imagemin'),
   kss = require('kss'),
   notify = require('gulp-notify'),
-  criticalCss = require('gulp-penthouse'),
+  penthouse = require('penthouse'),
   plumber = require('gulp-plumber'),
   postcss = require('gulp-postcss'),
   postcssMediaQuery = require('postcss-sort-media-queries'),
@@ -258,29 +259,21 @@ gulp.task('scripts', () => {
 });
 
 // Critical CSS
-gulp.task('critical-css', () => {
-  return gulp
-    .src(paths.styles.dist + '/styles.css')
-    .pipe(
-      criticalCss({
-        out: paths.styles.critical,
-        url: env.prod,
-        width: 1400,
-        height: 900,
-        strict: true,
-        userAgent:
-          'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
-        phantomJsOptions: {
-          'ssl-protocol': 'any',
-        },
-      })
-    )
-    .pipe(
-      cssnano({
-        safe: true,
-      })
-    )
-    .pipe(gulp.dest('./dist/'));
+gulp.task('critical-css', async () => {
+  penthouse({
+    css: paths.styles.dist + '/styles.css',
+    url: env.prod,
+    width: 1400,
+    height: 900,
+    strict: true,
+    propertiesToRemove: [
+      'text-decoration'
+    ],
+    userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+  })
+  .then(criticalCss => {
+    fs.writeFileSync(__dirname + '/includes/global/critical-css.php', criticalCss);
+  });
 });
 
 // Browser Sync
