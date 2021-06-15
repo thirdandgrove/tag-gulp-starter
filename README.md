@@ -10,9 +10,6 @@
 6. To run a one-time compilation of .scss files, use `gulp scss`. To generate KSS styleguides use `gulp kss`.
 
 ## Guidelines:
-
-- With rare case-by-case exceptions, bitmap sprites should never be used.
-- For multi-color illustrations for which a bitmap sprite might often be used, use an SVG sprite instead if at all possible.
 - Do not nest your CSS selectors, except for states `(:hover, etc.)`, pseudoelements `(::before, ::after)`, or pseudo-selectors `(:nth-child)`, etc. While SCSS provides this functionality, it can easily get out of control creating hard-to-read code and unwieldy selectors.
 - All styling should be done mobile-first. This repo contains a mixin for the `min-width` media query only, which in the vast majority of cases should be all you need.
 - When in doubt, break your code out into its own partial in appropriately named folders.

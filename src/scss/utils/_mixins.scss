@@ -124,3 +124,29 @@
     @warn "Invalid position";
   }
 }
+
+/**
+ * Container - great for creating constrained layouts
+ *
+ * Usage:
+ * .thing {
+ *   @include container($gutter: null, $inner: 20px);
+ * }
+ */
+@mixin container($max-width: 1400px, $gutter: 40px, $inner: 0) {
+  @if $gutter != null {
+    width: calc(100% - (2 * #{$gutter}));
+  }
+  @else {
+    width: 100%;
+  }
+
+  max-width: $max-width;
+  margin-left: auto;
+  margin-right: auto;
+
+  @if $inner != 0 {
+    padding-left: $inner;
+    padding-right: $inner;
+  }
+}
