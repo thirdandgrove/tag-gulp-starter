@@ -75,7 +75,7 @@ gulp.task('scss', () => {
     .src('./src/scss/styles.scss')
     .pipe(
       plumber({
-        errorHandler: function (err) {
+        errorHandler: function(err) {
           notify.onError({
             title: 'Gulp error in ' + err.plugin,
             message: err.toString(),
@@ -194,10 +194,8 @@ gulp.task('iconfont', () => {
     .pipe(gulp.dest(paths.font.dist));
 });
 
-gulp.task('iconfont-clean', function () {
-  return gulp
-    .src(paths.font.srcOptimized, { read: false, allowEmpty: true })
-    .pipe(clean());
+gulp.task('iconfont-clean', function() {
+  return gulp.src(paths.font.srcOptimized, { read: false, allowEmpty: true }).pipe(clean());
 });
 
 gulp.task('svgSprite', () => {
@@ -235,7 +233,7 @@ gulp.task('scripts', () => {
     .src(paths.scripts.src)
     .pipe(
       plumber({
-        errorHandler: function (err) {
+        errorHandler: function(err) {
           notify.onError({
             title: 'Gulp error in ' + err.plugin,
             message: err.toString(),
@@ -266,12 +264,9 @@ gulp.task('critical-css', async () => {
     width: 1400,
     height: 900,
     strict: true,
-    propertiesToRemove: [
-      'text-decoration'
-    ],
+    propertiesToRemove: ['text-decoration'],
     userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
-  })
-  .then(criticalCss => {
+  }).then(criticalCss => {
     fs.writeFileSync(__dirname + '/includes/global/critical-css.php', criticalCss);
   });
 });
@@ -298,10 +293,7 @@ gulp.task('kss', () => {
     builder: 'src/kss/theme',
     destination: paths.styleguide.dist,
     homepage: paths.styleguide.homepage,
-    css: [
-      '../' + paths.styles.dist + '/styles.css',
-      '../' + paths.styles.dist + '/kss.css',
-    ],
+    css: ['../' + paths.styles.dist + '/styles.css', '../' + paths.styles.dist + '/kss.css'],
     js: [
       '/core/misc/drupal.js',
       '/core/misc/drupal.init.js',
@@ -319,15 +311,9 @@ gulp.task('styles', gulp.series('scss', 'scsslint'));
 
 gulp.task('watch', () => {
   gulp.watch(paths.styles.src, gulp.series('styles')).on('change', reload);
-  gulp
-    .watch(paths.scripts.src, gulp.series('scripts', 'eslint'))
-    .on('change', reload);
-  gulp
-    .watch(paths.images.src, gulp.series('optimize-images'))
-    .on('change', reload);
-  gulp
-    .watch(paths.svg.src, gulp.series('optimize-svg', 'svgSprite'))
-    .on('change', reload);
+  gulp.watch(paths.scripts.src, gulp.series('scripts', 'eslint')).on('change', reload);
+  gulp.watch(paths.images.src, gulp.series('optimize-images')).on('change', reload);
+  gulp.watch(paths.svg.src, gulp.series('optimize-svg', 'svgSprite')).on('change', reload);
 });
 
 gulp.task(
@@ -342,7 +328,4 @@ gulp.task(
   )
 );
 gulp.task('default', gulp.parallel('styles', 'browser-sync', 'watch'));
-gulp.task(
-  'build',
-  gulp.series('styles', 'scripts', 'icons', 'kss', 'critical-css', 'svgSprite')
-);
+gulp.task('build', gulp.series('styles', 'scripts', 'icons', 'kss', 'critical-css', 'svgSprite'));
