@@ -6,13 +6,14 @@ var babel = require('gulp-babel'),
   concat = require('gulp-concat'),
   cssnano = require('gulp-cssnano'),
   eslint = require('gulp-eslint'),
+  fs = require('fs'),
   gulp = require('gulp'),
   iconfont = require('gulp-iconfont'),
   iconfontCSS = require('gulp-iconfont-css'),
   imagemin = require('gulp-imagemin'),
   kss = require('kss'),
   notify = require('gulp-notify'),
-  criticalCss = require('gulp-penthouse'),
+  penthouse = require('penthouse'),
   plumber = require('gulp-plumber'),
   postcss = require('gulp-postcss'),
   postcssMediaQuery = require('postcss-sort-media-queries'),
@@ -74,7 +75,7 @@ gulp.task('scss', () => {
     .src('./src/scss/styles.scss')
     .pipe(
       plumber({
-        errorHandler: function (err) {
+        errorHandler: function(err) {
           notify.onError({
             title: 'Gulp error in ' + err.plugin,
             message: err.toString(),
@@ -193,10 +194,8 @@ gulp.task('iconfont', () => {
     .pipe(gulp.dest(paths.font.dist));
 });
 
-gulp.task('iconfont-clean', function () {
-  return gulp
-    .src(paths.font.srcOptimized, { read: false, allowEmpty: true })
-    .pipe(clean());
+gulp.task('iconfont-clean', function() {
+  return gulp.src(paths.font.srcOptimized, { read: false, allowEmpty: true }).pipe(clean());
 });
 
 gulp.task('svgSprite', () => {
@@ -234,7 +233,7 @@ gulp.task('scripts', () => {
     .src(paths.scripts.src)
     .pipe(
       plumber({
-        errorHandler: function (err) {
+        errorHandler: function(err) {
           notify.onError({
             title: 'Gulp error in ' + err.plugin,
             message: err.toString(),
@@ -258,29 +257,18 @@ gulp.task('scripts', () => {
 });
 
 // Critical CSS
-gulp.task('critical-css', () => {
-  return gulp
-    .src(paths.styles.dist + '/styles.css')
-    .pipe(
-      criticalCss({
-        out: paths.styles.critical,
-        url: env.prod,
-        width: 1400,
-        height: 900,
-        strict: true,
-        userAgent:
-          'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
-        phantomJsOptions: {
-          'ssl-protocol': 'any',
-        },
-      })
-    )
-    .pipe(
-      cssnano({
-        safe: true,
-      })
-    )
-    .pipe(gulp.dest('./dist/'));
+gulp.task('critical-css', async () => {
+  penthouse({
+    css: paths.styles.dist + '/styles.css',
+    url: env.prod,
+    width: 1400,
+    height: 900,
+    strict: true,
+    propertiesToRemove: ['text-decoration'],
+    userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+  }).then(criticalCss => {
+    fs.writeFileSync(__dirname + '/includes/global/critical-css.php', criticalCss);
+  });
 });
 
 // Browser Sync
@@ -305,7 +293,12 @@ gulp.task('kss', () => {
     builder: 'src/kss/theme',
     destination: paths.styleguide.dist,
     homepage: paths.styleguide.homepage,
-    css: '../' + paths.styles.dist + '/styles.css',
+    css: ['../' + paths.styles.dist + '/styles.css', '../' + paths.styles.dist + '/kss.css'],
+    js: [
+      '/core/misc/drupal.js',
+      '/core/misc/drupal.init.js',
+      '../' + paths.scripts.dist + '/app.js',
+    ],
   });
 });
 
@@ -318,15 +311,9 @@ gulp.task('styles', gulp.series('scss', 'scsslint'));
 
 gulp.task('watch', () => {
   gulp.watch(paths.styles.src, gulp.series('styles')).on('change', reload);
-  gulp
-    .watch(paths.scripts.src, gulp.series('scripts', 'eslint'))
-    .on('change', reload);
-  gulp
-    .watch(paths.images.src, gulp.series('optimize-images'))
-    .on('change', reload);
-  gulp
-    .watch(paths.svg.src, gulp.series('optimize-svg', 'svgSprite'))
-    .on('change', reload);
+  gulp.watch(paths.scripts.src, gulp.series('scripts', 'eslint')).on('change', reload);
+  gulp.watch(paths.images.src, gulp.series('optimize-images')).on('change', reload);
+  gulp.watch(paths.svg.src, gulp.series('optimize-svg', 'svgSprite')).on('change', reload);
 });
 
 gulp.task(
@@ -341,7 +328,4 @@ gulp.task(
   )
 );
 gulp.task('default', gulp.parallel('styles', 'browser-sync', 'watch'));
-gulp.task(
-  'build',
-  gulp.series('styles', 'scripts', 'icons', 'kss', 'critical-css', 'svgSprite')
-);
+gulp.task('build', gulp.series('styles', 'scripts', 'icons', 'kss', 'critical-css', 'svgSprite'));
