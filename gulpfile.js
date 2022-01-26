@@ -23,7 +23,6 @@ const reload = browserSync.reload;
 //   concat = require('gulp-concat'),
 //   eslint = require('gulp-eslint'),
 //   fs = require('fs'),
-//   kss = require('kss'),
 //   penthouse = require('penthouse'),
 //   terser = require('gulp-terser'),
 
@@ -36,10 +35,6 @@ var paths = {
     src: 'src/scss/**/*.scss',
     critical: '/css/critical.css',
     dist: 'dist/css',
-  },
-  styleguide: {
-    dist: 'styleguide/',
-    homepage: '../kss/styleguide.md',
   },
   scripts: {
     src: 'src/js/custom/**/*.js',
@@ -183,23 +178,6 @@ gulp.task('browser-sync', () => {
   });
 });
 
-// KSS Styleguides
-gulp.task('kss', () => {
-  return kss({
-    source: 'src/scss/',
-    title: 'Styleguide',
-    builder: 'src/kss/theme',
-    destination: paths.styleguide.dist,
-    homepage: paths.styleguide.homepage,
-    css: ['../' + paths.styles.dist + '/styles.css', '../' + paths.styles.dist + '/kss.css'],
-    js: [
-      '/core/misc/drupal.js',
-      '/core/misc/drupal.init.js',
-      '../' + paths.scripts.dist + '/app.js',
-    ],
-  });
-});
-
 // Clear cache
 gulp.task('clear', () => {
   cache.clearAll();
@@ -215,4 +193,4 @@ gulp.task('watch', () => {
 });
 
 gulp.task('default', gulp.parallel('styles', 'browser-sync', 'watch'));
-gulp.task('build', gulp.series('styles', 'scripts', 'kss', 'critical-css'));
+gulp.task('build', gulp.series('styles', 'scripts', 'critical-css'));
