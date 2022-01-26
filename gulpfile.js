@@ -27,7 +27,6 @@ const reload = browserSync.reload;
 //   imagemin = require('gulp-imagemin'),
 //   kss = require('kss'),
 //   penthouse = require('penthouse'),
-//   scsslint = require('gulp-sass-lint'),
 //   svgSprite = require('gulp-svg-sprites'),
 //   terser = require('gulp-terser'),
 //   reload = browserSync.reload,
@@ -95,20 +94,6 @@ gulp.task('scss', () => {
     .pipe(sourcemaps.write('maps'))
     .pipe(gulp.dest(paths.styles.dist))
     .pipe(reload({ stream: true }));
-});
-
-gulp.task('scsslint', () => {
-  return gulp
-    .src(paths.styles.src)
-    .pipe(
-      scsslint({
-        options: {
-          configFile: 'sass-lint.yml',
-        },
-      })
-    )
-    .pipe(scsslint.format())
-    .pipe(scsslint.failOnError());
 });
 
 gulp.task('optimize-images', () => {
@@ -253,7 +238,7 @@ gulp.task('clear', () => {
   cache.clearAll();
 });
 
-gulp.task('styles', gulp.series('scss', 'scsslint'));
+// gulp.task('styles', gulp.series('scss', 'scsslint'));
 
 gulp.task('watch', () => {
   gulp.watch(paths.styles.src, gulp.series('styles')).on('change', reload);
