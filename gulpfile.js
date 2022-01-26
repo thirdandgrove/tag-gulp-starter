@@ -3,6 +3,7 @@
 const beeper = require('beeper');
 const browserSync = require('browser-sync');
 const cssnano = require('cssnano');
+const eslint = require('gulp-eslint');
 const gulp = require('gulp');
 const imagemin = require('gulp-imagemin');
 const notify = require('gulp-notify');
@@ -110,7 +111,7 @@ gulp.task('eslint', () => {
     .src(paths.scripts.src)
     .pipe(
       eslint({
-        parser: 'babel-eslint',
+        parser: '@babel/eslint-parser',
         rules: {
           'no-mutable-exports': 0,
         },
