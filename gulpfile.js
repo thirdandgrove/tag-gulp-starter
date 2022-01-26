@@ -8,8 +8,6 @@ var babel = require('gulp-babel'),
   eslint = require('gulp-eslint'),
   fs = require('fs'),
   gulp = require('gulp'),
-  iconfont = require('gulp-iconfont'),
-  iconfontCSS = require('gulp-iconfont-css'),
   imagemin = require('gulp-imagemin'),
   kss = require('kss'),
   notify = require('gulp-notify'),
@@ -31,9 +29,6 @@ var babel = require('gulp-babel'),
 // Environments
 var env = require('./.env');
 
-// Prefix with project code
-var fontName = 'icons';
-
 // Paths
 var paths = {
   styles: {
@@ -53,20 +48,10 @@ var paths = {
     src: 'src/images/**/*',
     dist: 'dist/images',
   },
-  font: {
-    src: 'src/images/font-icons/**/*.svg',
-    srcOptimized: '_temp/',
-    path: '../fonts/icons/',
-    dist: 'dist/fonts/icons/',
-  },
   svg: {
     src: 'src/images/**/*.svg',
     srcOptimized: 'dist/images/svg/',
     dist: 'dist',
-  },
-  icons: {
-    path: 'src/scss/templates/_icons-template.scss',
-    target: '../../../src/scss/global/__icons.scss',
   },
 };
 
@@ -75,7 +60,7 @@ gulp.task('scss', () => {
     .src('./src/scss/styles.scss')
     .pipe(
       plumber({
-        errorHandler: function(err) {
+        errorHandler: function (err) {
           notify.onError({
             title: 'Gulp error in ' + err.plugin,
             message: err.toString(),
@@ -135,25 +120,9 @@ gulp.task('optimize-images', () => {
     .pipe(gulp.dest(paths.images.dist));
 });
 
-gulp.task('optimize-svg-font', () => {
-  return gulp
-    .src(paths.font.src)
-    .pipe(
-      imagemin(
-        imagemin.svgo({
-          plugins: [
-            { convertPathData: { noSpaceAfterFlags: false } },
-            { mergePaths: { noSpaceAfterFlags: false } },
-          ],
-        })
-      )
-    )
-    .pipe(gulp.dest(paths.font.srcOptimized));
-});
-
 gulp.task('optimize-svg', () => {
   return gulp
-    .src([paths.svg.src, '!' + paths.font.src]) // dont optimize icon font svg
+    .src(paths.svg.src)
     .pipe(
       imagemin(
         imagemin.svgo({
@@ -166,36 +135,6 @@ gulp.task('optimize-svg', () => {
       )
     )
     .pipe(gulp.dest(paths.svg.srcOptimized));
-});
-
-gulp.task('iconfont', () => {
-  return gulp
-    .src(paths.font.srcOptimized + '*.svg')
-    .pipe(
-      iconfontCSS({
-        fontName: fontName,
-        path: paths.icons.path,
-        targetPath: paths.icons.target,
-        fontPath: paths.font.path,
-        cacheBuster: runTimestamp,
-      })
-    )
-    .pipe(
-      iconfont({
-        fontName: fontName,
-        // Remove woff2 if you get an ext error on compile
-        formats: ['svg', 'ttf', 'eot', 'woff', 'woff2'],
-        normalize: true,
-        fontHeight: 1001,
-        prependUnicode: true,
-        timestamp: runTimestamp,
-      })
-    )
-    .pipe(gulp.dest(paths.font.dist));
-});
-
-gulp.task('iconfont-clean', function() {
-  return gulp.src(paths.font.srcOptimized, { read: false, allowEmpty: true }).pipe(clean());
 });
 
 gulp.task('svgSprite', () => {
@@ -233,7 +172,7 @@ gulp.task('scripts', () => {
     .src(paths.scripts.src)
     .pipe(
       plumber({
-        errorHandler: function(err) {
+        errorHandler: function (err) {
           notify.onError({
             title: 'Gulp error in ' + err.plugin,
             message: err.toString(),
@@ -316,16 +255,5 @@ gulp.task('watch', () => {
   gulp.watch(paths.svg.src, gulp.series('optimize-svg', 'svgSprite')).on('change', reload);
 });
 
-gulp.task(
-  'icons',
-  gulp.series(
-    'optimize-images',
-    'optimize-svg-font',
-    'optimize-svg',
-    'iconfont',
-    'iconfont-clean',
-    'styles'
-  )
-);
 gulp.task('default', gulp.parallel('styles', 'browser-sync', 'watch'));
-gulp.task('build', gulp.series('styles', 'scripts', 'icons', 'kss', 'critical-css', 'svgSprite'));
+gulp.task('build', gulp.series('styles', 'scripts', 'kss', 'critical-css', 'svgSprite'));
