@@ -25,7 +25,6 @@ const reload = browserSync.reload;
 //   fs = require('fs'),
 //   kss = require('kss'),
 //   penthouse = require('penthouse'),
-//   svgSprite = require('gulp-svg-sprites'),
 //   terser = require('gulp-terser'),
 
 // Environments
@@ -102,27 +101,13 @@ gulp.task('stylelint', () => {
 
 gulp.task('optimize-images', () => {
   return gulp
-    .src([paths.images.src, '!' + paths.svg.src]) // dont optimize svg sprite images
+    .src([paths.images.src, '!' + paths.svg.src])
     .pipe(imagemin())
     .pipe(gulp.dest(paths.images.dist));
 });
 
 gulp.task('optimize-svg', () => {
   return gulp.src(paths.svg.src).pipe(imagemin()).pipe(gulp.dest(paths.svg.srcOptimized));
-});
-
-gulp.task('svgSprite', () => {
-  return gulp
-    .src(paths.svg.srcOptimized + '*.svg')
-    .pipe(
-      svgSprite({
-        mode: 'symbols',
-        preview: {
-          symbols: 'svg/index.html',
-        },
-      })
-    )
-    .pipe(gulp.dest(paths.svg.dist));
 });
 
 gulp.task('eslint', () => {
@@ -226,8 +211,8 @@ gulp.task('watch', () => {
   gulp.watch(paths.styles.src, gulp.series('styles')).on('change', reload);
   gulp.watch(paths.scripts.src, gulp.series('scripts', 'eslint')).on('change', reload);
   gulp.watch(paths.images.src, gulp.series('optimize-images')).on('change', reload);
-  gulp.watch(paths.svg.src, gulp.series('optimize-svg', 'svgSprite')).on('change', reload);
+  gulp.watch(paths.svg.src, gulp.series('optimize-svg')).on('change', reload);
 });
 
 gulp.task('default', gulp.parallel('styles', 'browser-sync', 'watch'));
-gulp.task('build', gulp.series('styles', 'scripts', 'kss', 'critical-css', 'svgSprite'));
+gulp.task('build', gulp.series('styles', 'scripts', 'kss', 'critical-css'));
