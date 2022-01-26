@@ -1,4 +1,3 @@
-// @TODO – Replace with updated list of dependencies.
 // @TODO – Replace gulp-stylelint with official version once it's released.
 const babel = require('gulp-babel');
 const beeper = require('beeper');
@@ -203,4 +202,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('default', gulp.parallel('styles', 'browser-sync', 'watch'));
-gulp.task('build', gulp.series('styles', 'scripts', 'critical-css'));
+gulp.task(
+  'build',
+  gulp.series('styles', 'scripts', 'optimize-images', 'optimize-svg', 'critical-css')
+);
