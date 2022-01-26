@@ -1,15 +1,16 @@
 // Global form styling should go here.
 // Styling for individual forms those should go in their own partials.
-
+// @TODO – Address empty blocks
+/* stylelint-disable */
 input,
 textarea {
-  -webkit-appearance: none;
-  border: none;
-  vertical-align: top;
-  margin: 0;
   max-width: 100%;
-  font-family: $font-family-sans;
+  margin: 0;
   font-size: 16px;
+  font-family: $font-family-sans;
+  vertical-align: top;
+  border: unset;
+  appearance: none;
 
   @include placeholder {
     // Probably a different color
@@ -18,35 +19,31 @@ textarea {
 
 input:focus,
 textarea:focus {
-
 }
 
 input:active,
 textarea:active {
-
 }
 
-input[type="checkbox"] {
-  -webkit-appearance: checkbox;
+input[type='checkbox'] {
   width: auto;
+  appearance: checkbox;
 }
 
-input[type="radio"] {
-  -webkit-appearance: radio;
+input[type='radio'] {
   width: auto;
+  appearance: radio;
 }
 
 select {
-
 }
 
-input[type="submit"],
+input[type='submit'],
 button {
   //probably start by extending .btn
 }
 
 label {
-
 }
 
 // sass-lint:disable no-important
@@ -55,6 +52,5 @@ fieldset {
 }
 
 legend {
-
 }
-
+/* stylelint-enable */

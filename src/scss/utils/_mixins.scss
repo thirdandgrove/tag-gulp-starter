@@ -24,8 +24,7 @@
     @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
       @content;
     }
-  }
-  @else {
+  } @else {
     @warn "Breakpoint doesn't exist please check breakpoints map.";
   }
 }
@@ -47,14 +46,11 @@
 
   @if $orientation == 'vertical' {
     background: linear-gradient(to bottom, $start-color, $end-color);
-  }
-  @else if $orientation == 'horizontal' {
+  } @else if $orientation == 'horizontal' {
     background: linear-gradient(to right, $start-color, $end-color);
-  }
-  @else if $orientation == 'radial' {
+  } @else if $orientation == 'radial' {
     background: radial-gradient(ellipse at center, $start-color, $end-color);
-  }
-  @else {
+  } @else {
     @warn "Invalid orientation";
   }
 }
@@ -77,21 +73,6 @@
 }
 
 /**
- * Placeholder text
- * Styles input placeholders
- *
- * Usage:
- * .thing {
- *   @include placeholder;
- * }
- */
-@mixin placeholder {
-  &:-moz-placeholder { @content; }
-  &::-moz-placeholder { @content; }
-  &::-webkit-input-placeholder { @content; }
-}
-
-/**
  * State is...
  * For when state changes are made with js.
  * Accepts:
@@ -104,23 +85,20 @@
  *   @include state-is('active', 'self');
  * }
  */
-@mixin state-is($el, $position: 'self', $parent: '' ) {
-  @if $position == "self" {
+@mixin state-is($el, $position: 'self', $parent: '') {
+  @if $position == 'self' {
     #{$parent} &#{$el} {
       @content;
     }
-  }
-  @else if $position == "child" {
+  } @else if $position == 'child' {
     #{$parent} & #{$el} {
       @content;
     }
-  }
-  @else if $position == "parent" {
+  } @else if $position == 'parent' {
     #{$parent} #{$el} & {
       @content;
     }
-  }
-  @else {
+  } @else {
     @warn "Invalid position";
   }
 }
@@ -136,17 +114,16 @@
 @mixin container($max-width: 1400px, $gutter: 40px, $inner: 0) {
   @if $gutter != null {
     width: calc(100% - (2 * #{$gutter}));
-  }
-  @else {
+  } @else {
     width: 100%;
   }
 
   max-width: $max-width;
-  margin-left: auto;
   margin-right: auto;
+  margin-left: auto;
 
   @if $inner != 0 {
-    padding-left: $inner;
     padding-right: $inner;
+    padding-left: $inner;
   }
 }
