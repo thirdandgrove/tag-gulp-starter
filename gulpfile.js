@@ -4,6 +4,7 @@ const beeper = require('beeper');
 const browserSync = require('browser-sync');
 const cssnano = require('cssnano');
 const gulp = require('gulp');
+const imagemin = require('gulp-imagemin');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
@@ -17,13 +18,11 @@ const stylelint = require('@ronilaukkarinen/gulp-stylelint');
 const reload = browserSync.reload;
 
 // var babel = require('gulp-babel'),
-//   browserSync = require('browser-sync'),
 //   cache = require('gulp-cache'),
 //   clean = require('gulp-clean'),
 //   concat = require('gulp-concat'),
 //   eslint = require('gulp-eslint'),
 //   fs = require('fs'),
-//   imagemin = require('gulp-imagemin'),
 //   kss = require('kss'),
 //   penthouse = require('penthouse'),
 //   svgSprite = require('gulp-svg-sprites'),
@@ -104,16 +103,7 @@ gulp.task('stylelint', () => {
 gulp.task('optimize-images', () => {
   return gulp
     .src([paths.images.src, '!' + paths.svg.src]) // dont optimize svg sprite images
-    .pipe(
-      imagemin(
-        imagemin.svgo({
-          plugins: [
-            { convertPathData: { noSpaceAfterFlags: false } },
-            { mergePaths: { noSpaceAfterFlags: false } },
-          ],
-        })
-      )
-    )
+    .pipe(imagemin())
     .pipe(gulp.dest(paths.images.dist));
 });
 
