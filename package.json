@@ -29,7 +29,7 @@
     "gulp-sass": "^5.1.0",
     "gulp-sass-glob": "^1.1.0",
     "gulp-sourcemaps": "^3.0.0",
-    "gulp-terser": "^1.1.7",
+    "gulp-terser": "^2.1.0",
     "penthouse": "^2.3.2",
     "postcss": "^8.4.5",
     "postcss-pxtorem": "^6.0.0",

@@ -1,7 +1,9 @@
 // @TODO – Replace with updated list of dependencies.
 // @TODO – Replace gulp-stylelint with official version once it's released.
+const babel = require('gulp-babel');
 const beeper = require('beeper');
 const browserSync = require('browser-sync');
+const concat = require('gulp-concat');
 const cssnano = require('cssnano');
 const eslint = require('gulp-eslint');
 const gulp = require('gulp');
@@ -16,16 +18,13 @@ const sass = require('gulp-sass')(require('sass'));
 const sassGlob = require('gulp-sass-glob');
 const sourcemaps = require('gulp-sourcemaps');
 const stylelint = require('@ronilaukkarinen/gulp-stylelint');
+const terser = require('gulp-terser');
 const reload = browserSync.reload;
 
-// var babel = require('gulp-babel'),
 //   cache = require('gulp-cache'),
 //   clean = require('gulp-clean'),
-//   concat = require('gulp-concat'),
-//   eslint = require('gulp-eslint'),
 //   fs = require('fs'),
 //   penthouse = require('penthouse'),
-//   terser = require('gulp-terser'),
 
 // Environments
 var env = require('./.env');
@@ -138,7 +137,7 @@ gulp.task('scripts', () => {
     )
     .pipe(
       babel({
-        presets: ['env'],
+        presets: ['@babel/env'],
       })
     )
     .pipe(plumber())
