@@ -1,30 +1,37 @@
-var babel = require('gulp-babel'),
-  beeper = require('beeper'),
-  browserSync = require('browser-sync'),
-  cache = require('gulp-cache'),
-  clean = require('gulp-clean'),
-  concat = require('gulp-concat'),
-  cssnano = require('gulp-cssnano'),
-  eslint = require('gulp-eslint'),
-  fs = require('fs'),
-  gulp = require('gulp'),
-  imagemin = require('gulp-imagemin'),
-  kss = require('kss'),
-  notify = require('gulp-notify'),
-  penthouse = require('penthouse'),
-  plumber = require('gulp-plumber'),
-  postcss = require('gulp-postcss'),
-  postcssMediaQuery = require('postcss-sort-media-queries'),
-  prefix = require('autoprefixer'),
-  pxtorem = require('postcss-pxtorem'),
-  sass = require('gulp-sass'),
-  sassGlob = require('gulp-sass-glob'),
-  scsslint = require('gulp-sass-lint'),
-  svgSprite = require('gulp-svg-sprites'),
-  sourcemaps = require('gulp-sourcemaps'),
-  terser = require('gulp-terser'),
-  reload = browserSync.reload,
-  runTimestamp = Math.round(Date.now() / 1000);
+// @TODO – Replace with updated list of dependencies.
+// @TODO – Replace gulp-stylelint with official version once it's released.
+const beeper = require('beeper');
+const browserSync = require('browser-sync');
+const cssnano = require('cssnano');
+const gulp = require('gulp');
+const notify = require('gulp-notify');
+const plumber = require('gulp-plumber');
+const postcss = require('gulp-postcss');
+const postcssMediaQuery = require('postcss-sort-media-queries');
+const prefix = require('autoprefixer');
+const pxtorem = require('postcss-pxtorem');
+const sass = require('gulp-sass')(require('sass'));
+const sassGlob = require('gulp-sass-glob');
+const sourcemaps = require('gulp-sourcemaps');
+const reload = browserSync.reload;
+
+// var babel = require('gulp-babel'),
+//   browserSync = require('browser-sync'),
+//   cache = require('gulp-cache'),
+//   clean = require('gulp-clean'),
+//   concat = require('gulp-concat'),
+//   cssnano = require('gulp-cssnano'),
+//   eslint = require('gulp-eslint'),
+//   fs = require('fs'),
+//   gulp = require('gulp'),
+//   imagemin = require('gulp-imagemin'),
+//   kss = require('kss'),
+//   penthouse = require('penthouse'),
+//   scsslint = require('gulp-sass-lint'),
+//   svgSprite = require('gulp-svg-sprites'),
+//   terser = require('gulp-terser'),
+//   reload = browserSync.reload,
+//   runTimestamp = Math.round(Date.now() / 1000);
 
 // Environments
 var env = require('./.env');
@@ -72,7 +79,6 @@ gulp.task('scss', () => {
     .pipe(sourcemaps.init())
     .pipe(sassGlob())
     .pipe(sass({ outputStyle: 'compressed' }))
-    .pipe(cssnano({ zindex: false, discardUnused: false, autoprefixer: false }))
     .pipe(
       postcss([
         prefix({ cascade: false }),
@@ -83,6 +89,7 @@ gulp.task('scss', () => {
           mediaQuery: true,
           propList: ['*'],
         }),
+        cssnano({ zindex: false, discardUnused: false, autoprefixer: false }),
       ])
     )
     .pipe(sourcemaps.write('maps'))
