@@ -108,20 +108,7 @@ gulp.task('optimize-images', () => {
 });
 
 gulp.task('optimize-svg', () => {
-  return gulp
-    .src(paths.svg.src)
-    .pipe(
-      imagemin(
-        imagemin.svgo({
-          plugins: [
-            { convertPathData: { noSpaceAfterFlags: false } },
-            { mergePaths: { noSpaceAfterFlags: false } },
-            { removeViewBox: false },
-          ],
-        })
-      )
-    )
-    .pipe(gulp.dest(paths.svg.srcOptimized));
+  return gulp.src(paths.svg.src).pipe(imagemin()).pipe(gulp.dest(paths.svg.srcOptimized));
 });
 
 gulp.task('svgSprite', () => {
