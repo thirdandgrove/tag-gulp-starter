@@ -3,6 +3,7 @@
 const babel = require('gulp-babel');
 const beeper = require('beeper');
 const browserSync = require('browser-sync');
+const cache = require('gulp-cache');
 const concat = require('gulp-concat');
 const criticalCss = require('gulp-penthouse');
 const cssnano = require('cssnano');
@@ -22,9 +23,6 @@ const sourcemaps = require('gulp-sourcemaps');
 const stylelint = require('@ronilaukkarinen/gulp-stylelint');
 const terser = require('gulp-terser');
 const reload = browserSync.reload;
-
-//   cache = require('gulp-cache'),
-//   clean = require('gulp-clean'),
 
 // Environments
 var env = require('./.env');
@@ -191,7 +189,7 @@ gulp.task('browser-sync', () => {
 });
 
 // Clear cache
-gulp.task('clear', () => {
+gulp.task('clear', async () => {
   cache.clearAll();
 });
 
