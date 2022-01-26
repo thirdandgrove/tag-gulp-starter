@@ -4,12 +4,14 @@ const babel = require('gulp-babel');
 const beeper = require('beeper');
 const browserSync = require('browser-sync');
 const concat = require('gulp-concat');
+const criticalCss = require('gulp-penthouse');
 const cssnano = require('cssnano');
 const eslint = require('gulp-eslint');
 const gulp = require('gulp');
 const imagemin = require('gulp-imagemin');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
+const penthouse = require('penthouse');
 const postcss = require('gulp-postcss');
 const postcssMediaQuery = require('postcss-sort-media-queries');
 const prefix = require('autoprefixer');
@@ -23,8 +25,6 @@ const reload = browserSync.reload;
 
 //   cache = require('gulp-cache'),
 //   clean = require('gulp-clean'),
-//   fs = require('fs'),
-//   penthouse = require('penthouse'),
 
 // Environments
 var env = require('./.env');
@@ -150,18 +150,30 @@ gulp.task('scripts', () => {
 });
 
 // Critical CSS
-gulp.task('critical-css', async () => {
-  penthouse({
-    css: paths.styles.dist + '/styles.css',
-    url: env.prod,
-    width: 1400,
-    height: 900,
-    strict: true,
-    propertiesToRemove: ['text-decoration'],
-    userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
-  }).then(criticalCss => {
-    fs.writeFileSync(__dirname + '/includes/global/critical-css.php', criticalCss);
-  });
+gulp.task('critical-css', () => {
+  return gulp
+    .src(paths.styles.dist + '/styles.css')
+    .pipe(
+      criticalCss({
+        out: paths.styles.critical,
+        url: env.prod,
+        width: 1400,
+        height: 900,
+        strict: true,
+        userAgent: 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+        phantomJsOptions: {
+          'ssl-protocol': 'any',
+        },
+      })
+    )
+    .pipe(
+      postcss([
+        cssnano({
+          safe: true,
+        }),
+      ])
+    )
+    .pipe(gulp.dest('./dist/'));
 });
 
 // Browser Sync

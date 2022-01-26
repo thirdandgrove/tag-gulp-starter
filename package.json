@@ -2,7 +2,6 @@
   "name": "tag-gulp-starter",
   "version": "0.3.1",
   "sasslintConfig": "sass-lint.yml",
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@babel/eslint-parser": "^7.16.5",
@@ -23,6 +22,7 @@
     "gulp-iconfont-css": "^2.3.0",
     "gulp-imagemin": "^7.1.0",
     "gulp-notify": "^4.0.0",
+    "gulp-penthouse": "^0.2.0",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^9.0.1",
     "gulp-rename": "^1.4.0",
