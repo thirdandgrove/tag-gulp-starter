@@ -12,7 +12,7 @@ textarea {
   border: unset;
   appearance: none;
 
-  @include placeholder {
+  &::placeholder {
     // Probably a different color
   }
 }
