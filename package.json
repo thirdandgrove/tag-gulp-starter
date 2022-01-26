@@ -4,6 +4,7 @@
   "sasslintConfig": "sass-lint.yml",
   "dependencies": {},
   "devDependencies": {
+    "@ronilaukkarinen/gulp-stylelint": "^14.0.5",
     "autoprefixer": "^10.4.2",
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
@@ -35,7 +36,11 @@
     "postcss-pxtorem": "^6.0.0",
     "postcss-sort-media-queries": "^4.2.1",
     "prettier": "^1.18.2",
-    "sass": "^1.49.0"
+    "sass": "^1.49.0",
+    "stylelint": "^14.3.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-sass-guidelines": "^9.0.1"
   },
   "browserslist": [
     "last 1 version"

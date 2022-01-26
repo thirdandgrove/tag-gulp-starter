@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "stylelint-config-sass-guidelines",
+    "stylelint-config-prettier",
+    "stylelint-config-rational-order"
+  ],
+  "rules": {
+    "order/properties-alphabetical-order": null,
+    "selector-class-pattern": "([a-z0-9]+(-{1})?[a-z0-9]+)|(--|__)",
+    "max-nesting-depth": 3,
+    "selector-no-qualifying-type": [
+      true,
+      {
+        "ignore": ["attribute", "class"]
+      }
+    ],
+    "selector-max-compound-selectors": 6
+  }
+}

@@ -13,6 +13,7 @@ const pxtorem = require('postcss-pxtorem');
 const sass = require('gulp-sass')(require('sass'));
 const sassGlob = require('gulp-sass-glob');
 const sourcemaps = require('gulp-sourcemaps');
+const stylelint = require('@ronilaukkarinen/gulp-stylelint');
 const reload = browserSync.reload;
 
 // var babel = require('gulp-babel'),
@@ -20,17 +21,13 @@ const reload = browserSync.reload;
 //   cache = require('gulp-cache'),
 //   clean = require('gulp-clean'),
 //   concat = require('gulp-concat'),
-//   cssnano = require('gulp-cssnano'),
 //   eslint = require('gulp-eslint'),
 //   fs = require('fs'),
-//   gulp = require('gulp'),
 //   imagemin = require('gulp-imagemin'),
 //   kss = require('kss'),
 //   penthouse = require('penthouse'),
 //   svgSprite = require('gulp-svg-sprites'),
 //   terser = require('gulp-terser'),
-//   reload = browserSync.reload,
-//   runTimestamp = Math.round(Date.now() / 1000);
 
 // Environments
 var env = require('./.env');
@@ -94,6 +91,14 @@ gulp.task('scss', () => {
     .pipe(sourcemaps.write('maps'))
     .pipe(gulp.dest(paths.styles.dist))
     .pipe(reload({ stream: true }));
+});
+
+gulp.task('stylelint', () => {
+  return gulp.src(paths.styles.src).pipe(
+    stylelint({
+      reporters: [{ formatter: 'string', console: true }],
+    })
+  );
 });
 
 gulp.task('optimize-images', () => {
@@ -238,7 +243,7 @@ gulp.task('clear', () => {
   cache.clearAll();
 });
 
-// gulp.task('styles', gulp.series('scss', 'scsslint'));
+gulp.task('styles', gulp.series('scss', 'stylelint'));
 
 gulp.task('watch', () => {
   gulp.watch(paths.styles.src, gulp.series('styles')).on('change', reload);
