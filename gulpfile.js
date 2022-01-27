@@ -1,5 +1,4 @@
 // @TODO – Replace gulp-stylelint with official version once it's released.
-const babel = require('gulp-babel');
 const beeper = require('beeper');
 const browserSync = require('browser-sync');
 const cache = require('gulp-cache');
@@ -19,9 +18,18 @@ const pxtorem = require('postcss-pxtorem');
 const sass = require('gulp-sass')(require('sass'));
 const sassGlob = require('gulp-sass-glob');
 const sourcemaps = require('gulp-sourcemaps');
+const swc = require('gulp-swc');
 const stylelint = require('@ronilaukkarinen/gulp-stylelint');
 const terser = require('gulp-terser');
 const reload = browserSync.reload;
+
+// Add options to configure swc: https://swc.rs/docs/configuring-swc
+const swcOptions = {
+  jsc: {
+    target: 'es5',
+  },
+  sourceMaps: true,
+};
 
 // Environments
 var env = require('./.env');
@@ -132,11 +140,7 @@ gulp.task('scripts', () => {
         },
       })
     )
-    .pipe(
-      babel({
-        presets: ['@babel/env'],
-      })
-    )
+    .pipe(swc(swcOptions))
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(concat('app.js'))
