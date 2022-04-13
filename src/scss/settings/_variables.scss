@@ -7,7 +7,6 @@ $c-white: #fff;
 // Font variables should start with 'font-'
 $font-family-serif: serif;
 $font-family-sans: sans-serif;
-$font-family-icons: 'icons';
 
 // Font weights
 $font-weight-thin: 300;
@@ -22,14 +21,5 @@ $font-weight-xblack: 900;
 $breakpoints: (
   sm: 480px,
   md: 768px,
-  lg: 960px,
-);
-
-// z-index map
-// Used in z() function used sitewide.
-// Remove the examples below when you are ready to layer your own.
-$z-layers: (
-  example_top: (),
-  example_middle: (),
-  example_bottom: (),
+  lg: 1024px,
 );

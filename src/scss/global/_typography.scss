@@ -16,54 +16,33 @@ h6 {
   margin-top: 0;
 }
 
-h1,
-%h1 {
+h1 {
 }
 
-h2,
-%h2 {
+h2 {
 }
 
-h3,
-%h3 {
+h3 {
 }
 
-h4,
-%h4 {
+h4 {
 }
 
-h5,
-%h5 {
+h5 {
 }
 
-h6,
-%h6 {
+h6 {
 }
 
-p,
-%p {
+p {
 }
 
 blockquote {
 }
 
-cite {
-}
-
-code {
-}
-
-dl {
-}
-
-dt {
-}
-
-dd {
-}
-
 b,
 strong {
+  font-weight; $font-weight-bold;
 }
 
 i,

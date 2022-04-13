@@ -10,18 +10,6 @@
   clip: rect(0 0 0 0);
 }
 
-// Use the mixin for this; this is for the mixin to call ONLY
-%icon {
-  font-weight: $font-weight-regular;
-  font-family: $font-family-icons;
-  font-style: normal;
-  font-variant: normal;
-  line-height: 1;
-  text-transform: none;
-  -webkit-font-smoothing: antialiased;
-  speak: none;
-}
-
 // Remove order/unordered list styling
 %not-list {
   margin: 0;
