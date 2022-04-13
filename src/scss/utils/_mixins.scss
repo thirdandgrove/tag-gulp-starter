@@ -1,15 +1,4 @@
 /**
- * Icon Styles
- * Variables for the icons are in the _variables partial
- * This mixin is invoked by the each loop in _icons.scss,
- * it should not be necessary to use it on its own.
- */
-@mixin icon-styles($symbol) {
-  @extend %icon;
-  content: $symbol;
-}
-
-/**
  * Breakpoints
  * Accepts:
  * - $breakpoint: {String} Name from varible breakpoint map.
